@@ -4,7 +4,7 @@ export default defineNuxtConfig({
   },
     ssr: true,
 
-  modules: ["@nuxtjs/tailwindcss", '@nuxtjs/google-fonts', '@nuxt/icon', ],
+  modules: ["@nuxt/ui", "@nuxtjs/tailwindcss", '@nuxtjs/google-fonts', '@nuxt/icon', '@nuxtjs/color-mode'],
   
   googleFonts: {
     families: {
