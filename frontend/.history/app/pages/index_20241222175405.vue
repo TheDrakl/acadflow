@@ -23,18 +23,16 @@
           <p class="mt-[14px] font-[300] text-[16px] leading-6 text-center">
             Create courses and manage schools with flexible tools
           </p>
-
-          <div class="flex flex-col lg:flex-row gap-4">
-            <div class="w-full lg:w-auto">
+          <div class="flex flex-col lg:flex-row space-x-4">
+            <div>
               <FirstButton
-                class="mt-[24px] text-white border-solid border-[2px] border-yellow-500 bg-buttonColor py-[0.7rem] px-8 lg:px-12 w-full"
+                class="mt-[24px] text-white border-solid border-[2px] border-yellow-500 bg-buttonColor py-[0.7rem] px-32 lg:px-24"
+                >Register Now</FirstButton
               >
-                Register Now
-              </FirstButton>
             </div>
-            <div class="w-full lg:w-auto">
+            <div>
               <FirstButton
-                class="mt-4 lg:mt-[24px] text-white border-solid border-yellow-600 border-[2px] hover:bg-yellow-600 bg-transparent py-[0.7rem] px-8 lg:px-8 w-full"
+                class="mt-[24px] text-white border-solid border-yellow-600 border-[2px] hover:bg-yellow-600 bg-transparent py-[0.7rem] px-[2rem] lg:px-8"
               >
                 <div class="items-center flex flex-row space-x-2">
                   <Icon
@@ -42,7 +40,7 @@
                     style="color: white"
                     size="1rem"
                   ></Icon>
-                  <span>Learn more about our platform</span>
+                  <span>Learn more about out platform</span>
                 </div>
               </FirstButton>
             </div>

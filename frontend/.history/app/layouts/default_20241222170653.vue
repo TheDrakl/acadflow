@@ -1,7 +1,7 @@
 <template>
   <div>
     <div
-      class="container mx-auto px-0 lg:px-4  text-black mt-2 lg:pt-4 lg:pb-4 font-roboto font-[300] rounded-2xl bg-gradient-to-r from-transparent via-gray-100 to-transparent"
+      class="container mx-auto px-0 lg:px-4 lg:bg-gray-50 text-black mt-2 lg:pt-4 lg:pb-4 font-roboto font-[300] rounded-2xl bg-gradient-to-r from-transparent via-gray-50 to-transparent"
     >
       <nav class="hidden md:flex justify-between items-center h-8">
         <!-- Logo -->

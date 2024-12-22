@@ -16,38 +16,45 @@
           class="right flex flex-1 flex-col text-white items-center mr-0 lg:mr-16"
         >
           <h1
-            class="font-[300] text-6xl lg:text-[5.3rem] lg:leading-[1] text-center md:text-right mr-auto mt-12 font-montserrat"
+            class="font-[300] text-6xl lg:text-[5.3rem] lg:leading-[1] text-right mr-auto mt-12 font-montserrat"
           >
             Transform Learning <br />with AcadFlow
           </h1>
           <p class="mt-[14px] font-[300] text-[16px] leading-6 text-center">
             Create courses and manage schools with flexible tools
           </p>
-
-          <div class="flex flex-col lg:flex-row gap-4">
-            <div class="w-full lg:w-auto">
+          <div>
+            <div>
               <FirstButton
-                class="mt-[24px] text-white border-solid border-[2px] border-yellow-500 bg-buttonColor py-[0.7rem] px-8 lg:px-12 w-full"
+                class="mt-[24px] text-white border-solid border-[2px] border-yellow-500 bg-buttonColor py-[0.7rem] px-24"
+                >Register Now</FirstButton
               >
-                Register Now
-              </FirstButton>
             </div>
-            <div class="w-full lg:w-auto">
+            <div>
               <FirstButton
-                class="mt-4 lg:mt-[24px] text-white border-solid border-yellow-600 border-[2px] hover:bg-yellow-600 bg-transparent py-[0.7rem] px-8 lg:px-8 w-full"
+                class="mt-[24px] text-white border-solid border-[2px] border-yellow-500 bg-buttonColor py-[0.7rem] px-24"
+                >
+                <Icon
+              name="material-symbols:chat-info"
+              style="color: white"
+              size="1rem"
+            ></Icon>
+            <span>Learn more about out platform</span>
+            </FirstButton
               >
-                <div class="items-center flex flex-row space-x-2">
-                  <Icon
-                    name="material-symbols:chat-info"
-                    style="color: white"
-                    size="1rem"
-                  ></Icon>
-                  <span>Learn more about our platform</span>
-                </div>
-              </FirstButton>
             </div>
           </div>
 
+          <p
+            class="mt-[6px] items-center flex justify-between space-x-1 cursor-pointer text-sm hover:underline"
+          >
+            <Icon
+              name="material-symbols:chat-info"
+              style="color: white"
+              size="1rem"
+            ></Icon>
+            <span>Learn more about out platform</span>
+          </p>
           <!-- Icons -->
           <div
             class="flex flex-col text-sm xl:-ml-[40%] mt-16 space-y-2 text-buttonColor"
@@ -108,41 +115,11 @@
         </p>
       </div>
     </section>
-
-    <section class="mt-12 min-h-[90vh] bg-milkWhite">
-      <div class="flex flex-row justify-between mx-4">
-        <div class="flex-shrink-0 w-[43%] mt-16">
-          <img
-            src="public/images/learning.png"
-            alt="Illustration"
-            class="h-[240px] w-[360px] lg:h-[600px] lg:w-[660px]"
-            draggable="false"
-          />
-        </div>
-        <div class="flex flex-col items-center w-full mt-6">
-          <h1
-            class="font-[500] text-6xl lg:text-6xl text lg:leading-[1] mt-12 font-montserrat text-center mr-[15%]"
-          >
-            Engaging Courses
-          </h1>
-          <p class="text-center mr-[18%] mt-[14px]">Perfect for self-paced learning, interactive lessons, or feedback-driven 
-            programs that students<br> can purchase and complete on their schedule.</p>
-          <div class="space-y-12 mt-8 ml-4">
-            <LearningProgramFeatures :num="1">Set up a course or workshop effortlessly—add a 
-              title, an image, and get started in minutes!</LearningProgramFeatures>
-            <LearningProgramFeatures :num="2">	Enrich your course with interactive content using 20+ customizable lesson blocks designed to engage learners.</LearningProgramFeatures>
-            <LearningProgramFeatures :num="3">Easily enroll students by sharing their email addresses—we’ll handle the rest to provide a seamless experience.</LearningProgramFeatures>
-            <LearningProgramFeatures :num="4">Monitor student progress and provide tailored feedback on assignments to help them succeed.</LearningProgramFeatures>
-          </div>
-        </div>
-      </div>
-    </section>
   </div>
 </template>
 
 <script setup>
 import FirstButton from "~/components/buttons/FirstButton.vue";
-import LearningProgramFeatures from "~/components/features/LearningProgramFeatures.vue";
 </script>
 
 <style scoped>

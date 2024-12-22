@@ -25,7 +25,7 @@
           </p>
 
           <div class="flex flex-col lg:flex-row gap-4">
-            <div class="w-full lg:w-auto">
+            <div class="w-full lg:w-auto space-y-2">
               <FirstButton
                 class="mt-[24px] text-white border-solid border-[2px] border-yellow-500 bg-buttonColor py-[0.7rem] px-8 lg:px-12 w-full"
               >
@@ -34,7 +34,7 @@
             </div>
             <div class="w-full lg:w-auto">
               <FirstButton
-                class="mt-4 lg:mt-[24px] text-white border-solid border-yellow-600 border-[2px] hover:bg-yellow-600 bg-transparent py-[0.7rem] px-8 lg:px-8 w-full"
+                class="mt-[24px] text-white border-solid border-yellow-600 border-[2px] hover:bg-yellow-600 bg-transparent py-[0.7rem] px-8 lg:px-8 w-full"
               >
                 <div class="items-center flex flex-row space-x-2">
                   <Icon
