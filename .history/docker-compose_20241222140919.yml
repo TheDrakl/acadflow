@@ -1,0 +1,22 @@
+services:
+  app:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: nuxt-app
+    ports:
+      - 8080:80
+
+  # Nginx for Frontend
+  nginx_frontend:
+    image: nginx:alpine
+    container_name: nginx-app
+    volumes:
+      - ./frontend/nginx/nginx.conf:/etc/nginx/nginx.conf
+    ports:
+      - 8080:80
+    depends_on:
+      - app
+
+volumes:
+  postgres_data_dev: # Named volume for persistent database storage
