@@ -20,9 +20,7 @@ export default defineNuxtConfig({
   compatibilityDate: "2024-12-19",
 
   components: [
-    {
-      path: '~/components', // will get any components nested in let's say /components/test too
-      pathPrefix: false,
-    },
-  ]
+    '~/components',           // Default components folder
+    '~/app/components',       // Add your custom folder
+  ],
 });

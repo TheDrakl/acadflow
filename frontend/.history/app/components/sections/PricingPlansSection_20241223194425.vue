@@ -1,0 +1,1 @@
+<section class="mt-12 min-h-[120vh] lg:min-h-[90vh] bg-milkWhite"></section>

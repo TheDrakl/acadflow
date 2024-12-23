@@ -5,9 +5,8 @@
     <LearningProgramSection />
 
     <LessonBuilderSection />
-    
     <PricingPlansSection />
-
+    
     <RegistrationFormSection />
   </div>
 </template>

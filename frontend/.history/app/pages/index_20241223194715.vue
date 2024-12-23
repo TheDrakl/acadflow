@@ -4,10 +4,12 @@
 
     <LearningProgramSection />
 
+    <!-- Lesson Builder Blocks -->
     <LessonBuilderSection />
-    
+    <!-- Pricing Plans -->
     <PricingPlansSection />
 
+    <!-- Registration Form -->
     <RegistrationFormSection />
   </div>
 </template>

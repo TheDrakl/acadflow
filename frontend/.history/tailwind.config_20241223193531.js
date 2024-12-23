@@ -21,7 +21,7 @@ module.exports = {
         yellowMain: '#EAAA00',
         milkWhite: '#F5F5F5',
         lightGray: '#949494',
-        darkGray: '#2D2D2D',
+        darkGray: '2D2D2D'
       }
     },
   },
