@@ -191,7 +191,7 @@
     <section class="mt-12 min-h-[120vh] lg:min-h-[90vh] bg-yellowMain">
       <div class="container mx-auto py-12">
         <h1
-          class="font-[500] text-5xl lg:text-6xl text lg:leading-[1] pt-4 font-montserrat text-center"
+          class="font-[500] text-6xl lg:text-6xl text lg:leading-[1] pt-4 font-montserrat text-center"
           data-aos="fade-center"
           data-aos-offset="400"
           data-aos-easing="ease-in-sine"
@@ -253,7 +253,7 @@
     <!-- Registration Form -->
     <section class="mt-12 min-h-[120vh] lg:min-h-[90vh] bg-yellowMain">
       <h1
-        class="font-[500] text-4xl lg:text-4xl text lg:leading-[1] pt-12 font-montserrat text-center"
+        class="font-[500] text-6xl lg:text-4xl text lg:leading-[1] pt-12 font-montserrat text-center"
         data-aos="fade-center"
         data-aos-offset="400"
         data-aos-easing="ease-in-sine"
@@ -278,11 +278,11 @@
         </div>
 
         <!-- Right Side -->
-        <div class="right flex justify-center lg:justify-end items-center order-1 lg:order-2">
+        <div class="right flex justify-end items-center order-1 lg:order-2">
           <img
             src="/images/register-form.png"
             alt="Illustration"
-            class="h-[380px] w-[420px] lg:h-[600px] lg:w-[660px]"
+            class="h-[220px] w-[360px] lg:h-[600px] lg:w-[660px]"
             draggable="false"
             loading="lazy"
             data-aos="fade-left"

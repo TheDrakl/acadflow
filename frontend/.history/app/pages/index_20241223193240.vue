@@ -201,7 +201,7 @@
         </h1>
         <!-- Grid for Features -->
         <div
-          class="grid grid-cols-1 lg:grid-cols-2 gap-y-16 gap-x-8 mt-16 place-items-center"
+          class="grid grid-cols-1 lg:grid-cols-2 lg:gap-y-16 gap-x-8 mt-16 place-items-center"
         >
           <LessonBuilderFeature
             title="Interactive Exercises"

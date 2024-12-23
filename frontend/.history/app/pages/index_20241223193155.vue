@@ -191,7 +191,7 @@
     <section class="mt-12 min-h-[120vh] lg:min-h-[90vh] bg-yellowMain">
       <div class="container mx-auto py-12">
         <h1
-          class="font-[500] text-5xl lg:text-6xl text lg:leading-[1] pt-4 font-montserrat text-center"
+          class="font-[500] text-6xl lg:text-6xl text lg:leading-[1] pt-4 font-montserrat text-center"
           data-aos="fade-center"
           data-aos-offset="400"
           data-aos-easing="ease-in-sine"
