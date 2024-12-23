@@ -1,0 +1,27 @@
+export default defineNuxtConfig({
+  future: {
+    compatibilityVersion: 4,
+  },
+    ssr: true,
+
+  modules: ["@nuxtjs/tailwindcss", '@nuxtjs/google-fonts', '@nuxt/icon', '@formkit/nuxt'],
+  
+  formkit: {
+    // Experimental support for auto loading (see note):
+    autoImport: true
+  }
+
+  googleFonts: {
+    families: {
+      Roboto: [300, 400, 500, 700],
+      Montserrat: [300, 400, 500],
+      Inter: [300, 400, 500]
+    },
+  },
+  srcDir: "./app/",
+
+  dir: {
+    app: "app",
+  },
+  compatibilityDate: "2024-12-19",
+});

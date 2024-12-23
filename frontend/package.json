@@ -11,9 +11,13 @@
     "postinstall": "nuxt prepare"
   },
   "dependencies": {
+    "@formkit/auto-animate": "^0.8.2",
+    "@formkit/nuxt": "^1.6.9",
     "@nuxt/ui": "^2.20.0",
+    "@nuxtjs/seo": "^2.0.2",
     "@nuxtjs/tailwindcss": "^6.12.2",
     "nuxt": "^3.14.1592",
+    "nuxt-aos": "^1.2.5",
     "vue": "latest",
     "vue-router": "latest"
   },

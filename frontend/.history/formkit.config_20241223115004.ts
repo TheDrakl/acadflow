@@ -1,0 +1,1 @@
+import { DefaultConfigOptions } from "@formkit/vue"
