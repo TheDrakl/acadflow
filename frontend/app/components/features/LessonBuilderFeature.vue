@@ -1,15 +1,23 @@
 <template>
-    <div class="w-[80%] h-60 lg:h-48 rounded-3xl border-[3px] border-white shadow-lg">
-        <h1 class="mt-2 text-center font-roboto text-2xl font-[500]">{{ title }}</h1>
-        <p class="p-2 mt-2 font-montserrat font-[400] text-start">
-            <slot></slot>
+    <div class="flex flex-col lg:flex-row items-center gap-8">
+      <!-- Image Section -->
+      <div class="flex-shrink-0">
+        <img :src="img" alt="Feature Image" class="w-64 lg:w-72 mx-auto lg:mx-0" draggable="false" loading="lazy">
+      </div>
+  
+      <!-- Text Section -->
+      <div class="flex-1 text-center lg:text-left">
+        <h2 class="text-4xl font-[500] mb-4">{{ title }}</h2>
+        <p class="text-lg leading-relaxed">
+          <slot></slot>
         </p>
+      </div>
     </div>
-</template>
-
-<script setup>
-const props = defineProps({
+  </template>
+  
+  <script setup>
+  const props = defineProps({
     title: String,
-})
-
-</script>
+    img: String,
+  });
+  </script>

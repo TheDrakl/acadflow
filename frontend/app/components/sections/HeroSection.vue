@@ -1,5 +1,5 @@
 <template>
-    <section class="bg-yellowMain min-h-[110vh] lg:min-h-[90vh] font-roboto">
+    <section class="bg-yellowMain min-h-[120vh] lg:min-h-[90vh] font-roboto">
       <div
         class="lg:mt-10 flex flex-col lg:flex-row justify-between items-center pt-20 mx-6 lg:mx-0"
       >
@@ -34,7 +34,7 @@
             </div>
             <div class="w-full lg:w-auto">
               <FirstButton
-                class="mt-4 lg:mt-[24px] text-white border-solid border-yellow-600 border-[2px] hover:bg-yellow-600 bg-transparent py-[0.7rem] px-8 lg:px-8 w-full shadow-md"
+                class="mt-4 lg:mt-[24px] text-white border-solid border-yellow-600 border-[2px] hover:bg-yellow-600 bg-transparent py-[0.7rem] px-8 lg:px-8 w-full shadow-lg"
               >
                 <div class="items-center flex flex-row space-x-2">
                   <Icon
@@ -87,7 +87,7 @@
       </div>
       <!-- Stars -->
       <div
-        class="absolute -bottom-20 lg:bottom-2 left-1/2 transform -translate-x-1/2 text-center"
+        class="absolute -bottom-40 lg:bottom-2 left-1/2 transform -translate-x-1/2 text-center"
       >
         <div class="flex -space-x-3 justify-center">
           <Icon

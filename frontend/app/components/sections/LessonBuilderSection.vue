@@ -16,6 +16,7 @@
         >
           <LessonBuilderFeature
             title="Interactive Exercises"
+            :img="'/images/interactive-exercises.svg'"
             data-aos="fade-right"
             data-aos-offset="200"
             data-aos-easing="ease-in-sine"
@@ -27,6 +28,7 @@
           >
           <LessonBuilderFeature
             title="Multimedia blocks"
+            :img="'/images/multimedia-blocks.svg'"
             data-aos="fade-left"
             data-aos-offset="200"
             data-aos-easing="ease-in-sine"
@@ -37,6 +39,7 @@
           >
           <LessonBuilderFeature
             title="Integration blocks"
+            :img="'/images/integration-blocks.svg'"
             data-aos="fade-right"
             data-aos-offset="200"
             data-aos-easing="ease-in-sine"
@@ -47,6 +50,7 @@
           >
           <LessonBuilderFeature
             title="Additional Tools"
+            :img="'/images/additional-tools.svg'"
             data-aos="fade-left"
             data-aos-offset="200"
             data-aos-easing="ease-in-sine"

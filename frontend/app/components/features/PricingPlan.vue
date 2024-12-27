@@ -1,7 +1,13 @@
 <template>
   <div class="font-roboto w-[60%]">
     <div class="flex flex-col">
-      <Icon name="bxs:cube" size="4rem" class="text-yellowMain -ml-1" />
+      
+      <div class="flex justify-between">
+        <Icon name="bxs:cube" size="4rem" class="text-yellowMain -ml-1" />
+        <div v-if="mostSold">
+          <h3 class="border-[1px] bg-milkWhite border-yellowMain py-1 px-2 rounded-lg shadow-md font-[300] font-inter">Best seller</h3>
+        </div>
+      </div>
       <h2 class="font-[500] text-3xl mt-2">Plus</h2>
       <div class="flex flex-row mt-6 items-center">
         <h3 class="font-[700] text-4xl flex items-center space-x-2">
@@ -12,7 +18,7 @@
           >
         </h3>
       </div>
-      <p class="font-montserrat">per user/{{time}}, billed annually</p>
+      <p class="font-montserrat">per user/{{ time }}, billed annually</p>
       <div class="mt-2">
         <FirstButton
           class="mt-4 lg:mt-[20px] text-white bg-buttonColor py-[0.7rem] px-8 lg:px-8 w-full shadow-lg"
@@ -45,5 +51,6 @@ const props = defineProps({
   description: String,
   features: Array,
   time: String,
+  mostSold: Boolean,
 });
 </script>

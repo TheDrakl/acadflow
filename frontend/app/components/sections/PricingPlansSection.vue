@@ -71,6 +71,7 @@
             'Option to add more slots',
           ]"
           :time="time"
+          :most-sold="true"
           class="pricing-card bg-blue-50"
           data-aos="fade-down"
           data-aos-duration="1000"
