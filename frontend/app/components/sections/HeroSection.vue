@@ -34,7 +34,7 @@
             </div>
             <div class="w-full lg:w-auto">
               <FirstButton
-                class="mt-4 lg:mt-[24px] text-white border-solid border-yellow-600 border-[2px] hover:bg-yellow-600 bg-transparent py-[0.7rem] px-8 lg:px-8 w-full shadow-lg"
+                class="mt-4 lg:mt-[24px] text-white border-solid border-yellow-600 border-[2px] hover:bg-yellow-600 bg-transparent py-[0.7rem] px-8 lg:px-8 w-full shadow-md"
               >
                 <div class="items-center flex flex-row space-x-2">
                   <Icon

@@ -6,7 +6,7 @@
 
     <LessonBuilderSection />
     
-    <PricingPlansSection />
+    <PricingPlansSection discount-annual="15"/>
 
     <RegistrationFormSection />
   </div>

@@ -1,37 +1,49 @@
 <template>
-  <div
-    class="w-[65%] h-[40vh] min-h-full bg-transparent border-yellow-500 border-[2px] rounded-3xl font-roboto text-center"
-  >
-    <h1 class="text-2xl text-center pt-2 font-[700]">{{ title }}</h1>
-    <p class="text-sm font-[400] font-montserrat">${{ price }} / month</p>
-
-    <div>
-      <li class="list-none text-start p-2 items-center">
-        <ul v-for="feature in features" :key="feature" class="flex flex-row items-center mx-4 mb-4">
-            <Icon name="material-symbols:verified" class="mr-2 bg-gray-600"></Icon>
-          {{
-            feature
-          }}
+  <div class="font-roboto w-[60%]">
+    <div class="flex flex-col">
+      <Icon name="bxs:cube" size="4rem" class="text-yellowMain -ml-1" />
+      <h2 class="font-[500] text-3xl mt-2">Plus</h2>
+      <div class="flex flex-row mt-6 items-center">
+        <h3 class="font-[700] text-4xl flex items-center space-x-2">
+          <span>£{{ price }}</span>
+          <span
+            class="p-1 px-3 bg-blue-100 rounded-lg font-[300] text-base font-inter"
+            >-{{ discount }}% Discount</span
+          >
+        </h3>
+      </div>
+      <p class="font-montserrat">per user/{{time}}, billed annually</p>
+      <div class="mt-2">
+        <FirstButton
+          class="mt-4 lg:mt-[20px] text-white bg-buttonColor py-[0.7rem] px-8 lg:px-8 w-full shadow-lg"
+          >Upgrade To {{ title }}</FirstButton
+        >
+      </div>
+      <div>
+        <h3 class="mt-8 text-xl font-[500]">{{ description }}</h3>
+        <ul class="list-none text-base mt-1 text-start text-gray-700">
+          <li v-for="feature in features">
+            <span
+              ><Icon
+                name="gridicons:checkmark"
+                size="1rem"
+                class="text-gray-600"
+            /></span>
+            <span>{{ feature }}</span>
+          </li>
         </ul>
-
-      </li>
+      </div>
     </div>
   </div>
 </template>
 
 <script setup>
 const props = defineProps({
-  title: {
-    type: String,
-    required: true,
-  },
-  price: {
-    type: Number,
-    required: true,
-  },
-  features: {
-    type: Array,
-    required: true,
-  },
+  title: String,
+  price: String,
+  discount: String,
+  description: String,
+  features: Array,
+  time: String,
 });
 </script>
