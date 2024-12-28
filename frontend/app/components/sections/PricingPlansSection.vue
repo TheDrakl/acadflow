@@ -1,5 +1,5 @@
 <template>
-  <section class="mt-12 min-h-[120vh] lg:min-h-[90vh] bg-milkWhite">
+  <section class="mt-12 min-h-[120vh] lg:min-h-[90vh] bg-milkWhite" id="pricing">
     <div class="container mx-auto py-6">
       <!-- Title Section -->
       <div
@@ -42,7 +42,7 @@
 
       <!-- Pricing Cards -->
       <div
-        class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-12 mt-[4%] place-items-center mx-4 lg:mx-16"
+        class="grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-3 gap-12 mt-[4%] place-items-center mx-4 lg:mx-16"
       >
         <PricingPlan
           title="Starter"

@@ -19,6 +19,7 @@ module.exports = {
       colors: {
         buttonColor: '#003366',
         yellowMain: '#EAAA00',
+        deepYellow: '#CC8A00',
         milkWhite: '#F5F5F5',
         lightGray: '#949494',
         darkGray: '#2D2D2D',

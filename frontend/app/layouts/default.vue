@@ -1,7 +1,7 @@
 <template>
   <div>
     <div
-      class="container mx-auto px-0 lg:px-4  text-black lg:pt-4 lg:pb-4 font-roboto font-[300] rounded-2xl bg-gradient-to-r from-transparent via-gray-100 to-transparent"
+      class="container mx-auto px-0 lg:px-4 text-black lg:pt-4 lg:pb-4 font-roboto font-[300] rounded-2xl bg-gradient-to-r from-transparent via-gray-100 to-transparent"
     >
       <nav class="hidden md:flex justify-between items-center h-8 mt-2">
         <!-- Logo -->
@@ -17,36 +17,36 @@
           class="flex space-x-8 lg:space-x-16 xl:space-x-28 text-[1rem] lg:text-[1.15rem]"
         >
           <li>
-            <a href="#" class="group transition duration-300">
+            <NuxtLink to="/" class="group transition duration-300 relative">
               HOME
               <span
                 class="block max-w-0 group-hover:max-w-full transition-all duration-500 h-0.5 bg-yellow-500"
               ></span>
-            </a>
+            </NuxtLink>
           </li>
           <li>
-            <a href="#" class="group transition duration-300">
+            <NuxtLink to="/about" class="group transition duration-300 relative">
               ABOUT US
               <span
                 class="block max-w-0 group-hover:max-w-full transition-all duration-500 h-0.5 bg-yellow-500"
               ></span>
-            </a>
+            </NuxtLink>
           </li>
           <li>
-            <a href="#" class="group transition duration-300">
+            <NuxtLink to="/" class="group transition duration-300 relative">
               DASHBOARD
               <span
                 class="block max-w-0 group-hover:max-w-full transition-all duration-500 h-0.5 bg-yellow-500"
               ></span>
-            </a>
+            </NuxtLink>
           </li>
           <li>
-            <a href="#" class="group transition duration-300">
+            <NuxtLink to="/" class="group transition duration-300 relative">
               CONTACT
               <span
                 class="block max-w-0 group-hover:max-w-full transition-all duration-500 h-0.5 bg-yellow-500"
               ></span>
-            </a>
+            </NuxtLink>
           </li>
         </ul>
         <FirstButton
@@ -55,14 +55,20 @@
         >
       </nav>
       <nav class="flex md:hidden float-right ml-auto">
-        <Icon name="pajamas:hamburger" style="color: black" size="2rem" class="absolute right-4 top-4"/>
+        <Icon
+          name="pajamas:hamburger"
+          style="color: black"
+          size="2rem"
+          class="absolute right-4 top-4"
+        />
       </nav>
     </div>
   </div>
   <main class="">
-    <NuxtPage />    
+    <NuxtPage />
   </main>
 
+  <footer class="mt-40 bg-deepYellow min-h-[40vh]"></footer>
 </template>
 
 <script setup>
