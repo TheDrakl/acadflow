@@ -4,7 +4,7 @@ export default defineNuxtConfig({
   },
     ssr: true,
 
-  modules: ["@nuxtjs/tailwindcss", '@nuxtjs/google-fonts', '@nuxt/icon', "nuxt-aos"],
+  modules: ['@nuxtjs/color-mode',"@nuxtjs/tailwindcss", '@nuxtjs/google-fonts', '@nuxt/icon', "nuxt-aos"],
   googleFonts: {
     families: {
       Roboto: [300, 400, 500, 700],

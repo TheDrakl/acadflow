@@ -1,7 +1,7 @@
 <template>
   <section class="bg-yellowMain min-h-[120vh] lg:min-h-[90vh] font-roboto">
     <div
-      class="lg:mt-10 flex flex-col lg:flex-row justify-between items-center pt-20 mx-6 lg:mx-0"
+      class="lg:mt-0 flex flex-col lg:flex-row justify-between items-center pt-20 mx-6 lg:mx-0"
     >
       <div class="left flex flex-col flex-1">
         <!-- Image -->
@@ -14,7 +14,7 @@
         />
       </div>
       <div
-        class="right flex flex-1 flex-col text-white items-center mr-0 lg:mr-16 mt-[5%]"
+        class="right flex flex-1 flex-col text-white dark:text-black items-center mr-0 lg:mr-16 mt-[5%]"
       >
         <h1
           class="font-[300] text-6xl lg:text-[5.3rem] lg:leading-[1] text-center md:text-right mr-auto font-montserrat"
@@ -114,7 +114,6 @@
 </template>
 
 <script setup>
-
 const goToSection = (section) => {
   document.getElementById(section).scrollIntoView({ behavior: "smooth" });
 };
