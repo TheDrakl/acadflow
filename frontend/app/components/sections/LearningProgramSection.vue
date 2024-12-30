@@ -26,7 +26,7 @@
             >
               Engaging Courses
             </h1>
-            <p class="text-center lg:mr-[18%] mt-[20px] font-roboto-[300]">
+            <p class="text-center lg:mr-[18%] mt-[20px] font-roboto-[300] font-roboto">
               Perfect for self-paced learning, interactive lessons, or
               feedback-driven programs that students<br />
               can purchase and complete on their schedule.
