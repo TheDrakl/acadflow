@@ -1,5 +1,5 @@
 <template>
-  <section class="min-h-[120vh] lg:min-h-[90vh] bg-milkWhite dark:bg-darkGrayBg" id="pricing">
+  <section class="min-h-[120vh] lg:min-h-[90vh] bg-milkWhite dark:bg-darkGrayBg dark:text-gray-300" id="pricing">
     <div class="container mx-auto py-6">
       <!-- Title Section -->
       <div
@@ -19,8 +19,8 @@
           class="bg-gray-200 rounded-md h-[2.2rem] mt-12 text-blue-500 flex flex-row justify-center items-center p-[2px] font-inter"
         >
           <div
-            class="rounded-md px-6 py-1 cursor-pointer hover:text-white hover:bg-blue-500"
-            :class="{ 'bg-white': activeAnnual }"
+            class="rounded-md px-6 py-1 cursor-pointer hover:text-white hover:bg-blue-500 dark:hover:bg-gray-600"
+            :class="{ 'bg-gray-100': activeAnnual }"
             @click="toggleAnnual('annual')"
           >
             <h4>
@@ -31,8 +31,8 @@
             </h4>
           </div>
           <div
-            class="rounded-md px-6 py-1 cursor-pointer hover:text-white hover:bg-blue-500"
-            :class="{ 'bg-white': !activeAnnual }"
+            class="rounded-md px-6 py-1 cursor-pointer hover:text-white hover:bg-blue-500 dark:hover:bg-gray-600"
+            :class="{ 'bg-gray-100': !activeAnnual }"
             @click="toggleAnnual('monthly')"
           >
             <h4>Monthly</h4>
@@ -42,7 +42,7 @@
 
       <!-- Pricing Cards -->
       <div
-        class="grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-3 gap-12 mt-[4%] place-items-center mx-4 lg:mx-16"
+        class="grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-3 gap-20 mt-[4%] place-items-center mx-4 lg:mx-10"
       >
         <PricingPlan
           title="Starter"
@@ -55,7 +55,7 @@
             'Upgrade to unlock more slots',
           ]"
           :time="time"
-          class="pricing-card bg-white"
+          class="pricing-card bg-white dark:bg-[#333333]"
           data-aos="fade-up"
           data-aos-duration="1000"
           data-aos-offset="300"
@@ -72,7 +72,7 @@
           ]"
           :time="time"
           :most-sold="true"
-          class="pricing-card bg-blue-50"
+          class="pricing-card bg-blue-50 dark:bg-darkGray"
           data-aos="fade-down"
           data-aos-duration="1000"
           data-aos-offset="300"
@@ -88,7 +88,7 @@
             'Customizable slot upgrades',
           ]"
           :time="time"
-          class="pricing-card bg-white"
+          class="pricing-card bg-white dark:bg-[#333333]"
           data-aos="fade-up"
           data-aos-duration="1000"
           data-aos-offset="300"
@@ -134,7 +134,7 @@ const time = computed(() => (activeAnnual.value ? 'year' : 'month'));
 }
 
 .pricing-card:hover {
-  transform: scale(1.02);
+  transform: scale(1.04);
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
 }
 </style>

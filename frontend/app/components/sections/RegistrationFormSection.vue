@@ -1,5 +1,5 @@
 <template>
-    <section class="min-h-[120vh] lg:min-h-[90vh] bg-yellowMain" id="register">
+    <section class="min-h-[120vh] lg:min-h-[90vh] bg-yellowMain dark:bg-yellowMainBg" id="register">
       <h1
         class="font-[500] text-4xl lg:text-4xl text lg:leading-[1] pt-12 font-montserrat text-center"
         data-aos="fade-center"
@@ -21,7 +21,7 @@
             <SignUpInput :text="'Enter your password'" :input-id="'password'"></SignUpInput>
             <SignUpInput :text="'Enter your password again'" :input-id="'password2'"></SignUpInput>
           </div>
-          <p class="text-white ml-44 text-sm mt-2">Already have an account? <span class="cursor-pointer hover:underline">Log in</span></p>
+          <p class="text-white dark:text-gray-100 ml-44 text-sm mt-2">Already have an account? <span class="cursor-pointer hover:underline">Log in</span></p>
           <FirstButton class="mt-[24px] text-white border-solid border-[2px] border-yellow-500 bg-buttonColor py-[0.7rem] w-[40%] shadow-lg">Register</FirstButton>
         </div>
 

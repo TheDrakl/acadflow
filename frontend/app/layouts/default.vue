@@ -6,11 +6,16 @@
       <nav class="hidden md:flex justify-between items-center h-auto mt-2">
         <!-- Logo -->
         <div class="logo">
-          <img
-            src="public/images/acadflow-logo.png"
-            alt="logo"
-            class="w-48 h-auto"
-          />
+          <NuxtLink
+            to="/"
+            class="group transition duration-300 relative hover:text-black dark:hover:text-white"
+          >
+            <img
+              src="public/images/acadflow-logo.png"
+              alt="logo"
+              class="w-48 h-auto cursor-pointer"
+            />
+          </NuxtLink>
         </div>
         <!-- Navigation -->
         <ul
@@ -41,7 +46,7 @@
           </li>
           <li>
             <NuxtLink
-              to="/"
+              to="/dashboard"
               class="group transition duration-300 relative hover:text-black dark:hover:text-white"
             >
               DASHBOARD
@@ -52,7 +57,7 @@
           </li>
           <li>
             <NuxtLink
-              to="/"
+              to="/contact"
               class="group transition duration-300 relative hover:text-black dark:hover:text-white"
             >
               CONTACT
@@ -87,7 +92,7 @@
     <NuxtPage />
   </main>
 
-  <footer class="mt-40 bg-deepYellow min-h-[40vh]"></footer>
+  <footer class="bg-deepYellow min-h-[50vh]"></footer>
 </template>
 
 <script setup>
