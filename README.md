@@ -16,6 +16,8 @@
   - Responsive and user-friendly interface built with **Nuxt.js** and **Tailwind CSS**.
   <img width="1710" alt="image" src="https://github.com/user-attachments/assets/7cbc44b3-161e-40a2-993f-b967e0ef5705" />
 
+  <img width="1710" alt="image" src="https://github.com/user-attachments/assets/631f02ef-f759-44e0-ab5e-c72bbdb52848" />
+
 
 
 ---
