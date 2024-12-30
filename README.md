@@ -14,7 +14,8 @@
   - Expand functionality as your needs grow.
 - **Modern Design**:
   - Responsive and user-friendly interface built with **Nuxt.js** and **Tailwind CSS**.
-  ![Uploading image.png…]()
+  <img width="1710" alt="image" src="https://github.com/user-attachments/assets/7cbc44b3-161e-40a2-993f-b967e0ef5705" />
+
 
 
 ---
