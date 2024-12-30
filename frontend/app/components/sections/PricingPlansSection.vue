@@ -1,5 +1,5 @@
 <template>
-  <section class="mt-12 min-h-[120vh] lg:min-h-[90vh] bg-milkWhite" id="pricing">
+  <section class="min-h-[120vh] lg:min-h-[90vh] bg-milkWhite dark:bg-darkGrayBg" id="pricing">
     <div class="container mx-auto py-6">
       <!-- Title Section -->
       <div

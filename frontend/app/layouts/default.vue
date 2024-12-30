@@ -1,9 +1,9 @@
 <template>
-  <div class="lg:pb-10 dark:bg-[#121212]">
+  <div class="lg:pb-6 dark:bg-darkGrayBg2 bg-white">
     <div
       class="container mx-auto px-0 lg:px-4 text-black lg:pt-4 lg:pb-4 font-roboto font-[300] rounded-2xl bg-gradient-to-r dark:bg-transparent dark:from-transparent dark:to-transparent from-transparent via-gray-100 to-transparent"
     >
-      <nav class="hidden md:flex justify-between items-center h-8 mt-2">
+      <nav class="hidden md:flex justify-between items-center h-auto mt-2">
         <!-- Logo -->
         <div class="logo">
           <img
@@ -14,12 +14,12 @@
         </div>
         <!-- Navigation -->
         <ul
-          class="flex space-x-8 lg:space-x-16 xl:space-x-28 text-[1rem] lg:text-[1.15rem]"
+          class="flex space-x-8 lg:space-x-16 xl:space-x-28 text-[1rem] lg:text-[1.15rem] text-darkGray dark:text-white"
         >
           <li>
             <NuxtLink
               to="/"
-              class="group transition duration-300 relative text-black dark:text-[#FFEB3B] hover:text-black dark:hover:text-white"
+              class="group transition duration-300 relative hover:text-black dark:hover:text-white"
             >
               <!-- Yellow link color -->
               HOME
@@ -31,7 +31,7 @@
           <li>
             <NuxtLink
               to="/about"
-              class="group transition duration-300 relative text-black dark:text-[#FFEB3B] hover:text-black dark:hover:text-white"
+              class="group transition duration-300 relative hover:text-black dark:hover:text-white"
             >
               ABOUT US
               <span
@@ -42,7 +42,7 @@
           <li>
             <NuxtLink
               to="/"
-              class="group transition duration-300 relative text-black dark:text-[#FFEB3B] hover:text-black dark:hover:text-white"
+              class="group transition duration-300 relative hover:text-black dark:hover:text-white"
             >
               DASHBOARD
               <span
@@ -53,7 +53,7 @@
           <li>
             <NuxtLink
               to="/"
-              class="group transition duration-300 relative text-black dark:text-[#FFEB3B] hover:text-black dark:hover:text-white"
+              class="group transition duration-300 relative hover:text-black dark:hover:text-white"
             >
               CONTACT
               <span
@@ -63,7 +63,7 @@
           </li>
         </ul>
         <FirstButton
-          class="self-center text-yellow-600 border-solid border-[2px] border-yellow-600 bg-transparent hover:bg-yellow-600 hover:text-white py-2 px-8"
+          class="self-center text-yellow-600 border-solid border-[2px] border-yellow-600 bg-transparent hover:bg-yellow-600 dark:hover:border-yellow-700 hover:text-white py-2 px-8"
           >Sign Up</FirstButton
         >
         <Icon

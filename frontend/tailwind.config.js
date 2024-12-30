@@ -19,10 +19,13 @@ module.exports = {
       colors: {
         buttonColor: '#003366',
         yellowMain: '#EAAA00',
+        yellowMainBg: '#D88F00',
         deepYellow: '#CC8A00',
         milkWhite: '#F5F5F5',
         lightGray: '#949494',
         darkGray: '#2D2D2D',
+        darkGrayBg: '#292929',
+        darkGrayBg2: '#181A1B',
       }
     },
   },

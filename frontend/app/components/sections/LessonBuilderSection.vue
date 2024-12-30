@@ -1,5 +1,5 @@
 <template>
-    <section class="mt-12 min-h-[120vh] lg:min-h-[100vh] bg-yellowMain">
+    <section class="min-h-[120vh] lg:min-h-[100vh] bg-yellowMain dark:bg-yellowMainBg text-darkGray">
       <div class="container mx-auto py-12">
         <h1
           class="font-[500] text-5xl lg:text-6xl text lg:leading-[1] pt-4 font-montserrat text-center"

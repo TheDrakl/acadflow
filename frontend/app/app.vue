@@ -6,3 +6,10 @@
   </div>
 </template>
 
+
+<style>
+html, body {
+  @apply bg-white;
+  @apply dark:bg-darkGrayBg;
+}
+</style>

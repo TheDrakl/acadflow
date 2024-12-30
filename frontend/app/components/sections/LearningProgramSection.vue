@@ -1,5 +1,5 @@
 <template>
-    <section class="mt-12 min-h-[120vh] lg:min-h-[90vh] bg-milkWhite">
+    <section class="min-h-[120vh] lg:min-h-[90vh] bg-milkWhite dark:bg-darkGrayBg text-darkGray dark:text-gray-300">
       <div
         class="flex flex-col lg:flex-row justify-center lg:justify-between items-center mx-4"
       >
