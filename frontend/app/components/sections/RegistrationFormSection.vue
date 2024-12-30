@@ -16,10 +16,10 @@
         data-aos-easing="ease-in-sine">
           <h3 class="text-3xl">Sign up</h3>
           <div class="flex flex-col w-full max-w-[80%] mt-6 space-y-4 items-center">
-            <SignUpInput :text="'Enter your name'" ></SignUpInput>
-            <SignUpInput :text="'Enter your email address'"></SignUpInput>
-            <SignUpInput :text="'Enter your password'"></SignUpInput>
-            <SignUpInput :text="'Enter your password again'"></SignUpInput>
+            <SignUpInput :text="'Enter your name'" :input-id="'name'" input-auto-complete="on"></SignUpInput>
+            <SignUpInput :text="'Enter your email address'" :input-id="'email'" input-auto-complete="on"></SignUpInput>
+            <SignUpInput :text="'Enter your password'" :input-id="'password'"></SignUpInput>
+            <SignUpInput :text="'Enter your password again'" :input-id="'password2'"></SignUpInput>
           </div>
           <p class="text-white ml-44 text-sm mt-2">Already have an account? <span class="cursor-pointer hover:underline">Log in</span></p>
           <FirstButton class="mt-[24px] text-white border-solid border-[2px] border-yellow-500 bg-buttonColor py-[0.7rem] w-[40%] shadow-lg">Register</FirstButton>

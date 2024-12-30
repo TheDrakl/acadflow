@@ -1,14 +1,15 @@
 <template>
   <div class="w-full max-w-[70%]">
-    <label for="textInput" class="sr-only">Enter Text</label>
+    <label :for="inputId" class="sr-only">Enter Text</label>
     <div
       class="h-12 border border-lightGray rounded-2xl focus-within:border-primary"
     >
       <input
-        id="textInput"
+        :id="inputId"
         type="text"
         class="w-full h-full px-4 bg-transparent outline-none rounded-2xl placeholder-gray-700 text-base"
         :placeholder="text"
+        :autocomplete="inputAutoComplete"
       />
     </div>
   </div>
@@ -19,6 +20,14 @@ const props = defineProps({
     text: {
         type: String,
         default: "Enter Text",
+    },
+    inputId: {
+        type: String,
+        default: "textInput",
+    },
+    inputAutoComplete: {
+        type: String,
+        default: "off",
     },
 })
 </script>
