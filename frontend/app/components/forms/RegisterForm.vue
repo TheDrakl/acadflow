@@ -31,17 +31,17 @@
       >
         <input
           type="text"
-          class="w-3/4 h-[2.5rem] px-4 border border-gray-900 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-500 focus:border-gray-500 transition duration-300"
+          class="w-3/4 h-[2.5rem] px-4 font-roboto border border-gray-900 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-500 focus:border-gray-500 transition duration-300"
           placeholder="Enter your email"
         />
         <input
           type="text"
-          class="w-3/4 h-[2.5rem] px-4 border border-gray-900 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-500 focus:border-gray-500 transition duration-300"
+          class="w-3/4 h-[2.5rem] font-roboto px-4 border border-gray-900 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-500 focus:border-gray-500 transition duration-300"
           placeholder="Enter your password"
         />
         <input
           type="text"
-          class="w-3/4 h-[2.5rem] px-4 border border-gray-900 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-500 focus:border-gray-500 transition duration-300"
+          class="w-3/4 h-[2.5rem] font-roboto px-4 border border-gray-900 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-500 focus:border-gray-500 transition duration-300"
           placeholder="Enter your password again"
         />
       </div>
