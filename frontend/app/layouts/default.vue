@@ -1,7 +1,7 @@
 <template>
   <div class="lg:pb-6 dark:bg-darkGrayBg2 bg-white">
     <div
-      class="container mx-auto px-0 lg:px-4 text-black lg:pt-4 lg:pb-4 font-roboto font-[300] rounded-2xl bg-gradient-to-r dark:bg-transparent dark:from-transparent dark:to-transparent from-transparent via-gray-100 to-transparent"
+      class="container mx-auto px-0 py-0 md:py-4 lg:px-4 text-black lg:pt-4 lg:pb-4 font-roboto font-[300] rounded-2xl bg-gradient-to-r dark:bg-transparent dark:from-transparent dark:to-transparent from-transparent via-gray-100 to-transparent"
     >
       <nav class="hidden md:flex justify-between items-center h-auto mt-2">
         <!-- Logo -->
@@ -13,13 +13,13 @@
             <img
               src="public/images/acadflow-logo.png"
               alt="logo"
-              class="w-48 h-auto cursor-pointer"
+              class="w-36 lg:w-48 h-auto cursor-pointer"
             />
           </NuxtLink>
         </div>
         <!-- Navigation -->
         <ul
-          class="flex space-x-8 lg:space-x-16 xl:space-x-28 text-[1rem] lg:text-[1.15rem] text-darkGray dark:text-white"
+          class="flex space-x-4 lg:space-x-16 xl:space-x-28 text-[1rem] lg:text-[1.15rem] text-darkGray dark:text-white"
         >
           <li>
             <NuxtLink
@@ -78,9 +78,11 @@
             @click="toggleColorMode"
             class="cursor-pointer hidden lg:flex lg:absolute top-[1.75rem] right-16 bg-black dark:bg-[#FFEB3B]"
           />
-          <div
-            class="bg-[url('/images/user-image.png')] bg-cover bg-center w-[2.8rem] h-[2.8rem] rounded-full border-[1px] border-solid border-gray-400 shadow-sm cursor-pointer"
-          ></div>
+          <NuxtLink to="/profile">
+            <div
+              class="bg-[url('/images/user-image.png')] bg-cover bg-center w-[2.5rem] h-[2.2rem] lg:w-[2.8rem] lg:h-[2.8rem] rounded-full border-[1px] border-solid border-gray-400 shadow-sm cursor-pointer"
+            ></div>
+          </NuxtLink>
         </div>
       </nav>
       <nav class="flex md:hidden float-right ml-auto">
@@ -114,15 +116,15 @@
 const isOpenLogin = ref(false);
 const isOpenRegister = ref(false);
 const colorMode = useColorMode();
-const iconName = ref('material-symbols:light-mode')
+const iconName = ref("material-symbols:light-mode");
 
 // Toggle login / register components
 const toggle = (val) => {
   if (val == "login") {
     isOpenLogin.value = false;
     isOpenRegister.value = true;
-    console.log(process.server)
-    console.log(process.client)
+    console.log(process.server);
+    console.log(process.client);
   } else if (val == "register") {
     isOpenLogin.value = true;
     isOpenRegister.value = false;
@@ -141,19 +143,20 @@ const closeRegister = () => {
   isOpenRegister.value = false;
 };
 
-
 // Color mode
 const toggleColorMode = () => {
-  if (colorMode.value === 'light') {
-    colorMode.preference = 'dark';
+  if (colorMode.value === "light") {
+    colorMode.preference = "dark";
   } else {
-    colorMode.preference = 'light';
+    colorMode.preference = "light";
   }
 };
 
 onMounted(() => {
   // Now we safely set the icon based on the color mode after the component has mounted
-  iconName.value = colorMode.value === 'light' ? 'material-symbols:nightlight' : 'material-symbols:light-mode';
+  iconName.value =
+    colorMode.value === "light"
+      ? "material-symbols:nightlight"
+      : "material-symbols:light-mode";
 });
-
 </script>
