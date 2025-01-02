@@ -19,6 +19,7 @@
     "@nuxtjs/tailwindcss": "^6.12.2",
     "nuxt": "^3.14.1592",
     "nuxt-aos": "^1.2.5",
+    "nuxt-icons": "^3.2.1",
     "vue": "latest",
     "vue-router": "latest"
   },
@@ -27,6 +28,7 @@
     "@iconify-json/gridicons": "^1.2.2",
     "@iconify-json/material-symbols": "^1.2.12",
     "@iconify-json/mdi": "^1.2.2",
+    "@iconify-json/mynaui": "^1.2.9",
     "@iconify-json/pajamas": "^1.2.4",
     "@iconify-json/ri": "^1.2.5",
     "@nuxt/icon": "^1.10.3",

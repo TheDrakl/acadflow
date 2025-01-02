@@ -4,7 +4,7 @@ export default defineNuxtConfig({
   },
     ssr: true,
 
-  modules: ['@nuxtjs/color-mode',"@nuxtjs/tailwindcss", '@nuxtjs/google-fonts', '@nuxt/icon', "nuxt-aos"],
+  modules: ['@nuxtjs/color-mode',"@nuxtjs/tailwindcss", '@nuxtjs/google-fonts', '@nuxt/icon', "nuxt-icons", "nuxt-aos"],
   googleFonts: {
     families: {
       Roboto: [300, 400, 500, 700],
@@ -24,5 +24,8 @@ export default defineNuxtConfig({
       path: '~/components', // will get any components nested in let's say /components/test too
       pathPrefix: false,
     },
-  ]
+  ],
+  plugins: [
+    '~/plugins/directives.js',
+  ],
 });

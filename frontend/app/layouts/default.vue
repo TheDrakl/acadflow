@@ -67,17 +67,22 @@
             </NuxtLink>
           </li>
         </ul>
-        <FirstButton
-          class="self-center text-yellow-600 border-solid border-[2px] border-yellow-600 bg-transparent hover:bg-yellow-600 dark:hover:border-yellow-700 hover:text-white py-2 px-8"
-          >Sign Up</FirstButton
-        >
-        <Icon
+        <div class="flex flex-row justify-between space-x-20 items-center">
+          <FirstButton
+            class="self-center text-yellow-600 border-solid border-[2px] border-yellow-600 bg-transparent hover:bg-yellow-600 dark:hover:border-yellow-700 hover:text-white py-2 px-8"
+            @click="openLogin"
+            >Sign In</FirstButton
+          >
+          <!-- <Icon
           :name="getIcon()"
           size="1.5rem"
           @click="toggleColorMode"
           class="cursor-pointer hidden lg:flex lg:absolute top-[1.75rem] right-16 bg-black dark:bg-[#FFEB3B]"
-        />
-        <!-- <Icon name="material-symbols:light-mode" size="1.5rem" /> -->
+        /> -->
+          <div
+            class="bg-[url('/images/user-image.png')] bg-cover bg-center w-[2.8rem] h-[2.8rem] rounded-full border-[1px] border-solid border-gray-400 shadow-sm cursor-pointer"
+          ></div>
+        </div>
       </nav>
       <nav class="flex md:hidden float-right ml-auto">
         <Icon
@@ -88,6 +93,16 @@
       </nav>
     </div>
   </div>
+  <Teleport to="body" v-if="isOpenLogin">
+    <div>
+      <LoginForm @close="closeLogin" @toggle="toggle" />
+    </div>
+  </Teleport>
+  <Teleport to="body" v-if="isOpenRegister">
+    <div>
+      <RegisterForm @close="closeRegister" @toggle="toggle" />
+    </div>
+  </Teleport>
   <main class="">
     <NuxtPage />
   </main>
@@ -96,7 +111,33 @@
 </template>
 
 <script setup>
-import FirstButton from "~/components/buttons/FirstButton.vue";
+// import FirstButton from "~/components/buttons/FirstButton.vue";
+
+const isOpenLogin = ref(false);
+const isOpenRegister = ref(false);
+
+const toggle = (val) => {
+  if (val == 'login') {
+    isOpenLogin.value = false
+    isOpenRegister.value = true
+  } else if (val == 'register') {
+    isOpenLogin.value = true
+    isOpenRegister.value = false
+  }
+}
+
+const openLogin = () => {
+  isOpenLogin.value = true
+}
+
+const closeLogin = () => {
+  isOpenLogin.value = false;
+};
+
+const closeRegister = () => {
+  isOpenRegister.value = false;
+};
+
 const colorMode = useColorMode();
 const getIcon = () => {
   if (colorMode.value == "light") {
