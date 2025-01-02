@@ -83,10 +83,12 @@ const handleEscape = (event) => {
 };
 
 onMounted(() => {
-  window.addEventListener("keydown", handleEscape); // Add global event listener for Escape key
+  document.body.style.overflow = "hidden"; // Disable scrolling
+  window.addEventListener("keydown", handleEscape);
 });
 
 onBeforeUnmount(() => {
-  window.removeEventListener("keydown", handleEscape); // Remove event listener on cleanup
+  document.body.style.overflow = "auto"; // Re-enable scrolling
+  window.removeEventListener("keydown", handleEscape);
 });
 </script>
