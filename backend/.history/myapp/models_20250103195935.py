@@ -17,6 +17,6 @@ class PricingPlan(models.Model):
     mostSold = models.BooleanField(default=False)
 
     def __str__(self):
-        return self.name + ' - $' + str(self.price)
+        return self.name + ' - $' + str(self.price
 
     

@@ -20,6 +20,9 @@ class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
         access = AccessToken(data["access"])
         access["name"] = user.name
         access["email"] = user.email
+        roles = list(user.userrole_set.values_list("role__name", flat=True))
+        if roles:
+            access["roles"] = roles
 
         # Replace the access token in the response with the updated one
         data["access"] = str(access)
