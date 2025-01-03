@@ -1,7 +1,7 @@
 <template>
   <div
     class="fixed inset-0 bg-gray-800 bg-opacity-75 flex justify-center items-center z-50"
-    @keydown="handleEscape"
+    @keydown="handleButton"
     tabindex="-1"
     @click.self="closeModal"
   >
@@ -42,8 +42,10 @@
           class="w-full flex flex-col space-y-4 justify-center items-center text-center"
         >
           <div class="w-full">
+            <label for="email" class="sr-only">Email</label>
             <input
               type="text"
+              id="email"
               class="w-3/4 h-[2.5rem] px-4 border font-roboto border-gray-900 rounded-lg focus:outline-none focus:ring-1 focus:ring-gray-500 focus:border-gray-500 transition duration-300"
               :class="{ 'border-[2px] border-red-500': form.email.error }"
               placeholder="Enter your email"
@@ -59,8 +61,10 @@
             </p>
           </div>
           <div class="w-full">
+            <label for="password" class="sr-only">Password</label>
             <input
-              type="text"
+              type="password"
+              id="password"
               class="w-3/4 h-[2.5rem] px-4 border font-roboto border-gray-900 rounded-lg focus:outline-none focus:ring-1 focus:ring-gray-500 focus:border-gray-500 transition duration-300"
               :class="{ 'border-[2px] border-red-500': form.password.error }"
               placeholder="Enter your password"
@@ -101,7 +105,6 @@
     </form>
   </div>
 </template>
-
 <script setup>
 
 const form = reactive({
@@ -121,9 +124,11 @@ const closeModal = () => {
   emit("close");
 };
 
-const handleEscape = (event) => {
+const handleButton = (event) => {
   if (event.key === "Escape") {
     closeModal();
+  } else if (event.key === 'Enter') {
+    handleSubmit()
   }
 };
 
@@ -169,11 +174,11 @@ const handleSubmit = () => {
 
 onMounted(() => {
   document.body.style.overflow = "hidden"; // Disable scrolling
-  window.addEventListener("keydown", handleEscape);
+  window.addEventListener("keydown", handleButton);
 });
 
 onBeforeUnmount(() => {
   document.body.style.overflow = "auto"; // Re-enable scrolling
-  window.removeEventListener("keydown", handleEscape);
+  window.removeEventListener("keydown", handleButton);
 });
 </script>

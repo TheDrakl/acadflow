@@ -1,5 +1,5 @@
 <template>
-  <div class="font-roboto w-[60%] ">
+  <div class="font-roboto w-[60%]">
     <!-- SKELETON -->
     <div v-if="loading" class="animate-pulse">
       <div class="flex justify-between mb-4">
@@ -36,12 +36,14 @@
             </h3>
           </div>
         </div>
-        <h2 class="font-[500] text-3xl mt-2">Plus</h2>
+        <h2 class="font-[500] text-3xl mt-2">{{ title }}</h2>
         <div class="flex flex-row mt-6 items-center">
-          <h3 class="font-[700] text-4xl flex items-center space-x-2">
+          <h3
+            class="font-[700] text-4xl flex items-center space-x-2 flex-wrap-nowrap"
+          >
             <span>£{{ price }}</span>
             <span
-              class="p-1 px-3 bg-blue-100 dark:bg-gray-500 rounded-lg font-[300] text-base font-inter"
+              class="p-1 px-3 bg-blue-100 w-max dark:bg-gray-500 rounded-lg font-[300] text-base font-inter"
               >-{{ discount }}% Discount</span
             >
           </h3>
@@ -55,7 +57,9 @@
         </div>
         <div>
           <h3 class="mt-8 text-xl font-[500]">{{ description }}</h3>
-          <ul class="list-none text-base mt-1 text-start text-gray-700 dark:text-gray-400">
+          <ul
+            class="list-none text-base mt-1 text-start text-gray-700 dark:text-gray-400"
+          >
             <li v-for="feature in features" :key="feature">
               <span
                 ><Icon
@@ -63,7 +67,7 @@
                   size="1rem"
                   class="text-gray-600 dark:text-gray-500 mr-2"
               /></span>
-              <span>{{ feature }}</span>
+              <span>{{ feature.name }}</span>
             </li>
           </ul>
         </div>
@@ -73,8 +77,6 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from "vue";
-
 const props = defineProps({
   title: String,
   price: String,
@@ -83,13 +85,6 @@ const props = defineProps({
   features: Array,
   time: String,
   mostSold: Boolean,
-});
-
-const loading = ref(true);
-
-onMounted(() => {
-  setTimeout(() => {
-    loading.value = false;
-  }, 2000); // Simulate data fetching delay
+  loading: Boolean,
 });
 </script>

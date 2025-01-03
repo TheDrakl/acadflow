@@ -2,14 +2,22 @@ export default defineNuxtConfig({
   future: {
     compatibilityVersion: 4,
   },
-    ssr: true,
+  ssr: true,
 
-  modules: ['@nuxtjs/color-mode',"@nuxtjs/tailwindcss", '@nuxtjs/google-fonts', '@nuxt/icon', "nuxt-icons", "nuxt-aos"],
+  modules: [
+    "@nuxtjs/color-mode",
+
+    "@nuxtjs/tailwindcss",
+    "@nuxtjs/google-fonts",
+    "@nuxt/icon",
+    "nuxt-icons",
+    "nuxt-aos",
+  ],
   googleFonts: {
     families: {
       Roboto: [300, 400, 500, 700],
       Montserrat: [300, 400, 500],
-      Inter: [300, 400, 500]
+      Inter: [300, 400, 500],
     },
   },
   srcDir: "./app/",
@@ -21,11 +29,9 @@ export default defineNuxtConfig({
 
   components: [
     {
-      path: '~/components', // will get any components nested in let's say /components/test too
+      path: "~/components", // will get any components nested in let's say /components/test too
       pathPrefix: false,
     },
   ],
-  plugins: [
-    '~/plugins/directives.js',
-  ],
+  plugins: ["~/plugins/directives.js"],
 });

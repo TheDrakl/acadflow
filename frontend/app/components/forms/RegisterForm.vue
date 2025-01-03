@@ -1,7 +1,7 @@
 <template>
   <div
     class="fixed inset-0 bg-gray-800 bg-opacity-75 flex justify-center items-center z-50"
-    @keydown="handleEscape"
+    @keydown="handleButton"
     tabindex="-1"
     @click.self="closeModal"
   >
@@ -41,7 +41,9 @@
         <div class="w-full flex flex-col space-y-4 justify-center items-center text-center">
           <!-- Email Field -->
           <div class="w-full">
+            <label for="email" class="sr-only">Email Address</label>
             <input
+              id="email"
               type="text"
               class="w-3/4 h-[2.5rem] px-4 border font-roboto border-gray-900 rounded-lg focus:outline-none focus:ring-1 focus:ring-gray-500 focus:border-gray-500 transition duration-300"
               :class="{ 'border-[2px] border-red-500': form.email.error }"
@@ -59,8 +61,10 @@
           </div>
           <!-- Password Field -->
           <div class="w-full">
+            <label for="password" class="sr-only">Password</label>
             <input
-              type="password"
+              id="password"
+              type="text"
               class="w-3/4 h-[2.5rem] px-4 border font-roboto border-gray-900 rounded-lg focus:outline-none focus:ring-1 focus:ring-gray-500 focus:border-gray-500 transition duration-300"
               :class="{ 'border-[2px] border-red-500': form.password.error }"
               placeholder="Enter your password"
@@ -77,8 +81,10 @@
           </div>
           <!-- Confirm Password Field -->
           <div class="w-full">
+            <label for="password2" class="sr-only">Confirm Password</label>
             <input
-              type="password"
+              id="password2"
+              type="text"
               class="w-3/4 h-[2.5rem] px-4 border font-roboto border-gray-900 rounded-lg focus:outline-none focus:ring-1 focus:ring-gray-500 focus:border-gray-500 transition duration-300"
               :class="{ 'border-[2px] border-red-500': form.password2.error }"
               placeholder="Confirm your password"
@@ -176,9 +182,11 @@ const closeModal = () => {
   emit("close");
 };
 
-const handleEscape = (event) => {
+const handleButton = (event) => {
   if (event.key === "Escape") {
     closeModal();
+  } else if (event.key === 'Enter') {
+    handleSubmit()
   }
 };
 
@@ -188,11 +196,11 @@ const handleFocus = (field) => {
 
 onMounted(() => {
   document.body.style.overflow = "hidden"; // Disable scrolling
-  window.addEventListener("keydown", handleEscape);
+  window.addEventListener("keydown", handleButton);
 });
 
 onBeforeUnmount(() => {
   document.body.style.overflow = "auto"; // Re-enable scrolling
-  window.removeEventListener("keydown", handleEscape);
+  window.removeEventListener("keydown", handleButton);
 });
 </script>

@@ -5,14 +5,16 @@
     <LearningProgramSection />
 
     <LessonBuilderSection />
-    
-    <PricingPlansSection discount-annual="15"/>
+
+    <PricingPlansSection discount-annual="15" />
 
     <RegistrationFormSection />
   </div>
 </template>
 
 <script setup lang="ts">
+
+
 useHead({
   title: "AcadFlow | Transform Learning with AcadFlow",
   meta: [
