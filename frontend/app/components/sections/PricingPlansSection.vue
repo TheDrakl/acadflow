@@ -42,7 +42,7 @@
           class="pricing-card bg-white dark:bg-[#333333]"
           data-aos="fade-up"
           data-aos-duration="1000"
-          data-aos-offset="300"
+          data-aos-offset="400"
         />
       </div>
     </div>

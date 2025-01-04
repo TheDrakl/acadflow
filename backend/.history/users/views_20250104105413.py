@@ -58,9 +58,5 @@ class LoginView(generics.GenericAPIView):
         return Response(
             {
                 "user": {"email": user.email, "name": user.get_full_name()},
-                "tokens": {
-                    "refresh": str(refresh),
-                    "access": str(refresh.access_token),
-                },
             }
         )

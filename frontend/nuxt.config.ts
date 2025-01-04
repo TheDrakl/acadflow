@@ -6,7 +6,7 @@ export default defineNuxtConfig({
 
   modules: [
     "@nuxtjs/color-mode",
-
+    "nuxt3-notifications",
     "@nuxtjs/tailwindcss",
     "@nuxtjs/google-fonts",
     "@nuxt/icon",

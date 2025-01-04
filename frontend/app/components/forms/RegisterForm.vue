@@ -4,6 +4,7 @@
     @keydown="handleButton"
     tabindex="-1"
     @click.self="closeModal"
+    v-if="!success"
   >
     <form
       @submit.prevent="handleSubmit"
@@ -11,7 +12,11 @@
     >
       <div
         class="p-6 rounded-lg shadow-lg max-w-md w-full items-center justify-center flex flex-col relative"
-        :class="{ 'bg-gray-100': isLoading, 'bg-white': !isLoading, 'opacity-50 pointer-events-none': isLoading }"
+        :class="{
+          'bg-gray-100': isLoading,
+          'bg-white': !isLoading,
+          'opacity-50 pointer-events-none': isLoading,
+        }"
         @click.stop
       >
         <!-- Close Icon -->
@@ -23,7 +28,10 @@
         />
 
         <!-- Loading Spinner -->
-        <div v-if="isLoading" class="absolute inset-0 flex justify-center items-center bg-opacity-50 bg-gray-800 z-20">
+        <div
+          v-if="isLoading"
+          class="absolute inset-0 flex justify-center items-center bg-opacity-50 bg-gray-800 z-20"
+        >
           <Spinning />
         </div>
 
@@ -38,13 +46,16 @@
           ></ContinueWithForm>
         </div>
         <p class="font-roboto font-[500] text-md my-2">Or</p>
-        <div class="w-full flex flex-col space-y-4 justify-center items-center text-center">
+        <div
+          class="w-full flex flex-col space-y-4 justify-center items-center text-center"
+        >
           <!-- Email Field -->
           <div class="w-full">
-            <label for="email" class="sr-only">Email Address</label>
+            <label for="registerEmail" class="sr-only">Email Address</label>
             <input
-              id="email"
-              type="text"
+              id="registerEmail"
+              type="email"
+              name="email"
               class="w-3/4 h-[2.5rem] px-4 border font-roboto border-gray-900 rounded-lg focus:outline-none focus:ring-1 focus:ring-gray-500 focus:border-gray-500 transition duration-300"
               :class="{ 'border-[2px] border-red-500': form.email.error }"
               placeholder="Enter your email"
@@ -61,9 +72,9 @@
           </div>
           <!-- Password Field -->
           <div class="w-full">
-            <label for="password" class="sr-only">Password</label>
+            <label for="registerPassword" class="sr-only">Password</label>
             <input
-              id="password"
+              id="registerPassword"
               type="text"
               class="w-3/4 h-[2.5rem] px-4 border font-roboto border-gray-900 rounded-lg focus:outline-none focus:ring-1 focus:ring-gray-500 focus:border-gray-500 transition duration-300"
               :class="{ 'border-[2px] border-red-500': form.password.error }"
@@ -81,9 +92,11 @@
           </div>
           <!-- Confirm Password Field -->
           <div class="w-full">
-            <label for="password2" class="sr-only">Confirm Password</label>
+            <label for="registerPassword2" class="sr-only"
+              >Confirm Password</label
+            >
             <input
-              id="password2"
+              id="registerPassword2"
               type="text"
               class="w-3/4 h-[2.5rem] px-4 border font-roboto border-gray-900 rounded-lg focus:outline-none focus:ring-1 focus:ring-gray-500 focus:border-gray-500 transition duration-300"
               :class="{ 'border-[2px] border-red-500': form.password2.error }"
@@ -121,6 +134,14 @@
       </div>
     </form>
   </div>
+  <div
+    v-if="success"
+    class="fixed bottom-0 inset-0 flex justify-center items-end z-50"
+  >
+    <h2 class="p-4 bg-green-400 text-center font-roboto w-full">
+      You successfully registered an account, now you can login
+    </h2>
+  </div>
 </template>
 
 <script setup>
@@ -133,6 +154,8 @@ const form = reactive({
 });
 
 const isLoading = ref(false);
+
+const success = ref(false);
 
 const validateForm = (form) => {
   let isValid = true;
@@ -159,18 +182,45 @@ const validateForm = (form) => {
   return isValid;
 };
 
-const handleSubmit = () => {
-  console.log("Form submitted");
+const handleSubmit = async () => {
   const isValid = validateForm(form);
 
   if (isValid) {
-    console.log("Form is valid:", form);
     isLoading.value = true;
-    setTimeout(() => {
-      isLoading.value = false;
-    }, 3000);
-  } else {
-    console.log("Form is invalid:", form);
+    try {
+      await registerUser(); // Wait for the registration to complete
+      success.value = true;
+      setTimeout(() => {
+        success.value = false;
+        closeModal();
+      }, 3000);
+    } catch (error) {
+      console.error("Error during registration:", error);
+    } finally {
+      isLoading.value = false; // Ensure this runs after the process completes
+    }
+  }
+};
+
+const registerUser = async () => {
+  try {
+    const response = await $fetch("http://127.0.0.1:8000/users/register/", {
+      method: "POST", // Ensure method is uppercase
+      body: {
+        email: form.email.value, // Access the correct property
+        name: "",
+        password: form.password.value, // Ensure you provide the correct value
+        confirm_password: form.password2.value, // Match the field name in your backend
+      },
+      headers: {
+        "Content-Type": "application/json", // Ensure proper content type
+      },
+    });
+
+    console.log("Registration successful:");
+    console.log(response);
+  } catch (err) {
+    console.error("An unexpected error occurred:", err);
   }
 };
 
@@ -185,8 +235,8 @@ const closeModal = () => {
 const handleButton = (event) => {
   if (event.key === "Escape") {
     closeModal();
-  } else if (event.key === 'Enter') {
-    handleSubmit()
+  } else if (event.key === "Enter") {
+    handleSubmit();
   }
 };
 
@@ -195,12 +245,16 @@ const handleFocus = (field) => {
 };
 
 onMounted(() => {
-  document.body.style.overflow = "hidden"; // Disable scrolling
-  window.addEventListener("keydown", handleButton);
+  if (typeof window !== "undefined") {
+    document.body.style.overflow = "hidden";
+    window.addEventListener("keydown", handleButton);
+  }
 });
 
 onBeforeUnmount(() => {
-  document.body.style.overflow = "auto"; // Re-enable scrolling
-  window.removeEventListener("keydown", handleButton);
+  if (typeof window !== "undefined") {
+    document.body.style.overflow = "auto";
+    window.removeEventListener("keydown", handleButton);
+  }
 });
 </script>

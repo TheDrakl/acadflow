@@ -4,6 +4,7 @@
     @keydown="handleButton"
     tabindex="-1"
     @click.self="closeModal"
+    v-if="!success"
   >
     <form
       @submit.prevent="handleSubmit"
@@ -11,7 +12,11 @@
     >
       <div
         class="p-6 rounded-lg shadow-lg max-w-md w-full items-center justify-center flex flex-col relative"
-        :class="{ 'bg-gray-100': isLoading, 'bg-white': !isLoading, 'opacity-50 pointer-events-none': isLoading }"
+        :class="{
+          'bg-gray-100': isLoading,
+          'bg-white': !isLoading,
+          'opacity-50 pointer-events-none': isLoading,
+        }"
         @click.stop
       >
         <!-- Close Icon -->
@@ -23,7 +28,10 @@
         />
 
         <!-- Loading Spinner -->
-        <div v-if="isLoading" class="absolute inset-0 flex justify-center items-center bg-opacity-50 bg-gray-800 z-20">
+        <div
+          v-if="isLoading"
+          class="absolute inset-0 flex justify-center items-center bg-opacity-50 bg-gray-800 z-20"
+        >
           <Spinning />
         </div>
 
@@ -42,10 +50,11 @@
           class="w-full flex flex-col space-y-4 justify-center items-center text-center"
         >
           <div class="w-full">
-            <label for="email" class="sr-only">Email</label>
+            <label for="loginEmail" class="sr-only">Email</label>
             <input
               type="text"
-              id="email"
+              id="loginEmail"
+              name="email"
               class="w-3/4 h-[2.5rem] px-4 border font-roboto border-gray-900 rounded-lg focus:outline-none focus:ring-1 focus:ring-gray-500 focus:border-gray-500 transition duration-300"
               :class="{ 'border-[2px] border-red-500': form.email.error }"
               placeholder="Enter your email"
@@ -61,10 +70,11 @@
             </p>
           </div>
           <div class="w-full">
-            <label for="password" class="sr-only">Password</label>
+            <label for="loginPassword" class="sr-only">Password</label>
             <input
               type="password"
-              id="password"
+              id="loginPassword"
+              name="password"
               class="w-3/4 h-[2.5rem] px-4 border font-roboto border-gray-900 rounded-lg focus:outline-none focus:ring-1 focus:ring-gray-500 focus:border-gray-500 transition duration-300"
               :class="{ 'border-[2px] border-red-500': form.password.error }"
               placeholder="Enter your password"
@@ -104,15 +114,25 @@
       </div>
     </form>
   </div>
+  <div v-if="success && !isLoading && !errors">
+    class="fixed bottom-0 inset-0 flex justify-center items-end z-50" >
+    <h2 class="p-4 bg-green-400 text-center font-roboto w-full">
+      You successfully logged in, now you can use your dashboard
+    </h2>
+  </div>
 </template>
 <script setup>
-
 const form = reactive({
   email: { value: "", error: "" },
   password: { value: "", error: "" },
 });
 
+const success = ref(false);
+const errors = ref([]);
+
 const isLoading = ref(false);
+
+const token = ref("");
 
 const emit = defineEmits(["close", "toggle"]);
 
@@ -127,8 +147,8 @@ const closeModal = () => {
 const handleButton = (event) => {
   if (event.key === "Escape") {
     closeModal();
-  } else if (event.key === 'Enter') {
-    handleSubmit()
+  } else if (event.key === "Enter") {
+    handleSubmit();
   }
 };
 
@@ -157,28 +177,64 @@ const validateForm = (form) => {
   return isValid;
 };
 
-const handleSubmit = () => {
-  console.log("Form submitted");
+const handleSubmit = async () => {
   const isValid = validateForm(form);
 
   if (isValid) {
-    console.log("Form is valid:", form);
     isLoading.value = true;
-    setTimeout(() => {
-      isLoading.value = false
-    }, 3000)
-  } else {
-    console.log("Form is invalid:", form);
+    try {
+      await loginUser(); // Wait for the registration to complete
+      success.value = true;
+      setTimeout(() => {
+        success.value = false;
+        closeModal();
+      }, 1000);
+    } catch (error) {
+      console.error("Error during registration:", error);
+    } finally {
+      isLoading.value = false; // Ensure this runs after the process completes
+    }
+  }
+};
+
+const loginUser = async () => {
+  try {
+    const response = await $fetch("http://127.0.0.1:8000/users/login/", {
+      method: "POST",
+      body: {
+        email: form.email.value, // Ensure these match your backend fields
+        password: form.password.value,
+      },
+      headers: {
+        "Content-Type": "application/json", // Ensure proper content type
+      },
+    });
+
+    console.log("Login successful:", response);
+    token.value = response.tokens.refresh
+    localStorage.setItem("token", token.value)
+    console.log(token.value)
+  } catch (err) {
+    if (err.data) {
+      console.error("Validation errors:", err.data);
+      errors.value = err.data;
+    } else {
+      console.error("Unexpected error:", err);
+    }
   }
 };
 
 onMounted(() => {
-  document.body.style.overflow = "hidden"; // Disable scrolling
-  window.addEventListener("keydown", handleButton);
+  if ((typeof window !== "undefined") & !success) {
+    document.body.style.overflow = "hidden";
+    window.addEventListener("keydown", handleButton);
+  }
 });
 
 onBeforeUnmount(() => {
-  document.body.style.overflow = "auto"; // Re-enable scrolling
-  window.removeEventListener("keydown", handleButton);
+  if ((typeof window !== "undefined") & !success) {
+    document.body.style.overflow = "auto";
+    window.removeEventListener("keydown", handleButton);
+  }
 });
 </script>

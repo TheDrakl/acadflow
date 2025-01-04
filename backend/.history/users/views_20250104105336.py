@@ -41,26 +41,13 @@ class RegisterView(generics.CreateAPIView):
         )
 
 
-class LoginView(generics.GenericAPIView):
-    serializer_class = UserLoginSerializer
-
-    def post(self, request, *args, **kwargs):
-        # Use the serializer to validate the login data
-        serializer = self.get_serializer(data=request.data)
-        serializer.is_valid(raise_exception=True)
-
-        # Get the validated user data and generate tokens
-        user = serializer.validated_data["user"]
-
-        refresh = RefreshToken.for_user(user)
-
-        # Return the user data along with the tokens
-        return Response(
-            {
-                "user": {"email": user.email, "name": user.get_full_name()},
-                "tokens": {
-                    "refresh": str(refresh),
-                    "access": str(refresh.access_token),
-                },
-            }
-        )
+@api_view(['POST'])
+def login_view(request):
+    email = request.data.get('email')
+    password = request.data.get('password')
+    user = authenticate(username=email, password=password)
+    
+    if user:
+        # Return JWT or success response
+        return Response({'token': 'JWT_TOKEN_HERE'}, status=status.HTTP_200_OK)
+    return Response({'error': 'Invalid credentials'}, status=status.HTTP_401_UNAUTHORIZED)

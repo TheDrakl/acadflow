@@ -17,6 +17,7 @@ class CustomTokenObtainPairView(TokenObtainPairView):
     serializer_class = CustomTokenObtainPairSerializer
 
 
+
 class UserList(generics.ListAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
@@ -40,6 +41,15 @@ class RegisterView(generics.CreateAPIView):
             }
         )
 
+    # Create tokens without custom fields
+    # def get_tokens_for_user(self, user):
+    #     refresh = RefreshToken.for_user(user)
+
+    #     return {
+    #         "refresh": str(refresh),
+    #         "access": str(refresh.access_token),
+    #     }
+
 
 class LoginView(generics.GenericAPIView):
     serializer_class = UserLoginSerializer
@@ -52,15 +62,9 @@ class LoginView(generics.GenericAPIView):
         # Get the validated user data and generate tokens
         user = serializer.validated_data["user"]
 
-        refresh = RefreshToken.for_user(user)
-
         # Return the user data along with the tokens
         return Response(
             {
                 "user": {"email": user.email, "name": user.get_full_name()},
-                "tokens": {
-                    "refresh": str(refresh),
-                    "access": str(refresh.access_token),
-                },
             }
         )

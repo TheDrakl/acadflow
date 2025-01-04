@@ -123,8 +123,6 @@ const toggle = (val) => {
   if (val == "login") {
     isOpenLogin.value = false;
     isOpenRegister.value = true;
-    console.log(process.server);
-    console.log(process.client);
   } else if (val == "register") {
     isOpenLogin.value = true;
     isOpenRegister.value = false;

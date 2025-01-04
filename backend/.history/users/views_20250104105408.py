@@ -52,15 +52,11 @@ class LoginView(generics.GenericAPIView):
         # Get the validated user data and generate tokens
         user = serializer.validated_data["user"]
 
-        refresh = RefreshToken.for_user(user)
+        refresh = 
 
         # Return the user data along with the tokens
         return Response(
             {
                 "user": {"email": user.email, "name": user.get_full_name()},
-                "tokens": {
-                    "refresh": str(refresh),
-                    "access": str(refresh.access_token),
-                },
             }
         )
