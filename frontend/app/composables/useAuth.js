@@ -1,5 +1,5 @@
 import { ref } from 'vue';
-import {jwtDecode} from 'jwt-decode'; // Ensure jwtDecode is imported correctly
+import { jwtDecode } from 'jwt-decode'; // Ensure jwtDecode is imported correctly
 
 export function useAuth() {
   // Reactive state for managing login status and access token
@@ -31,7 +31,7 @@ export function useAuth() {
 
   // Method to check if the user is authenticated (token is valid)
   const isAuthenticated = () => {
-    return logged.value && !!accessToken.value;
+    return logged.value && !!accessToken.value && !isAccessTokenExpired();
   };
 
   // Method to check if access token is expired
@@ -39,8 +39,6 @@ export function useAuth() {
     if (!accessToken.value) return true; // If no access token, consider expired
     try {
       const decoded = jwtDecode(accessToken.value);
-      console.log("Token is not expired");
-      console.log(decoded.exp * 1000, Date.now());
       return decoded.exp * 1000 < Date.now(); // Check expiration
     } catch (error) {
       console.error("Error decoding token:", error);
@@ -48,14 +46,20 @@ export function useAuth() {
     }
   };
 
+  // Method to refresh token only if the user is logged in and the token is expired
   const refreshToken = async () => {
+    // Check if the user is logged in and the token is expired
+    if (!isAuthenticated()) {
+      console.log("User is not authenticated or token is valid, skipping refresh.");
+      return;
+    }
+
     try {
       const response = await $fetch('http://127.0.0.1:8000/users/token/refresh/', {
         method: 'POST',
         credentials: 'include',
       });
-      console.log(response)
-  
+
       if (response && response.access) {
         console.log('Token refreshed:', response.access);
         login(response.access); // Store the new access token
@@ -68,16 +72,6 @@ export function useAuth() {
       logout(); // In case of an error, log out
     }
   };
-
-  onMounted(() => {
-    if (isAuthenticated() && isAccessTokenExpired()) {
-      console.log("Token expired, refreshing...");
-      refreshToken();
-    }
-    else {
-      console.log("Token is not expired");
-    }
-  })
 
   return {
     logged,

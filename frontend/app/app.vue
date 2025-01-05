@@ -7,7 +7,6 @@
   </div>
 </template>
 
-
 <style>
 html,
 body {
@@ -17,7 +16,8 @@ body {
 </style>
 
 <script setup>
-import { useAuth } from './composables/useAuth'; // or wherever your useAuth function is
+import { onMounted } from "vue";
+import { useAuth } from "@/composables/useAuth"; // Adjust the import path accordingly
 
 const { isAuthenticated, isAccessTokenExpired, refreshToken } = useAuth();
 
@@ -25,8 +25,6 @@ onMounted(() => {
   if (isAuthenticated() && isAccessTokenExpired()) {
     console.log("Token expired, refreshing...");
     refreshToken();
-  } else {
-    console.log("Token is not expired");
   }
 });
 </script>

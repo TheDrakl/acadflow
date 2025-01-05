@@ -68,9 +68,16 @@
         </ul>
         <div class="flex flex-row justify-between space-x-20 items-center">
           <FirstButton
+            v-if="!isLoggedIn"
             class="self-center text-yellow-600 border-solid border-[2px] border-yellow-600 bg-transparent hover:bg-yellow-600 dark:hover:border-yellow-700 hover:text-white py-2 px-8"
             @click="openLogin"
             >Sign In</FirstButton
+          >
+          <FirstButton
+            v-if="isLoggedIn"
+            class="self-center text-yellow-600 border-solid border-[2px] border-yellow-600 bg-transparent hover:bg-yellow-600 dark:hover:border-yellow-700 hover:text-white py-2 px-8"
+            @click="logout()"
+            >Log Out</FirstButton
           >
           <Icon
             :name="iconName"
@@ -111,12 +118,27 @@
 
   <footer class="bg-deepYellow min-h-[50vh]"></footer>
 </template>
-
 <script setup>
 const isOpenLogin = ref(false);
 const isOpenRegister = ref(false);
 const colorMode = useColorMode();
 const iconName = ref("material-symbols:light-mode");
+const auth = useAuth();
+
+const isLoggedIn = ref(false);
+
+// Move the async function inside onMounted to avoid the warning
+
+// Check if the user is logged in
+const isLoggedInFn = async () => {
+  try {
+    const authenticated = await auth.isAuthenticated();
+    isLoggedIn.value = authenticated;
+  } catch (error) {
+    console.error("Error checking authentication:", error);
+    isLoggedIn.value = false; // Ensure it's set to false in case of error
+  }
+};
 
 // Toggle login / register components
 const toggle = (val) => {
@@ -126,6 +148,37 @@ const toggle = (val) => {
   } else if (val == "register") {
     isOpenLogin.value = true;
     isOpenRegister.value = false;
+  }
+};
+
+const getCsrfToken = () => {
+  const name = "csrftoken=";
+  const cookies = document.cookie.split(";");
+
+  for (let i = 0; i < cookies.length; i++) {
+    let cookie = cookies[i].trim();
+    if (cookie.indexOf(name) === 0) {
+      return cookie.substring(name.length, cookie.length);
+    }
+  }
+  return null;
+};
+
+const logout = async () => {
+  try {
+    const csrfToken = getCsrfToken()
+    const response = await $fetch("http://127.0.0.1:8000/users/logout/", {
+      method: "POST",
+      headers: {
+        "X-CSRFToken": csrfToken, // Include CSRF token for security
+      },
+      credentials: "include", // Ensures cookies are sent with the request
+    });
+    console.log(response.value);
+    // localStorage.removeItem('access_token')
+    isLoggedIn.value = false;
+  } catch (error) {
+    console.error("Logout error:", error);
   }
 };
 
@@ -141,17 +194,16 @@ const closeRegister = () => {
   isOpenRegister.value = false;
 };
 
-// Color mode
+// Color mode toggle
 const toggleColorMode = () => {
-  if (colorMode.value === "light") {
-    colorMode.preference = "dark";
-  } else {
-    colorMode.preference = "light";
-  }
+  colorMode.preference = colorMode.value === "light" ? "dark" : "light";
 };
 
-onMounted(() => {
-  // Now we safely set the icon based on the color mode after the component has mounted
+onMounted(async () => {
+  // First, check authentication
+  await isLoggedInFn();
+
+  // Now, update the icon for color mode
   iconName.value =
     colorMode.value === "light"
       ? "material-symbols:nightlight"

@@ -34,7 +34,7 @@ export function $api<T>(
     // Handle specific errors (e.g., 401 Unauthorized)
     if (error.response?.status === 401) {
       console.log('Unauthorized. Logging out.');
-      auth.logout();
+      // auth.logout();
     }
 
     throw error; // Re-throw the error to handle it in the calling function
