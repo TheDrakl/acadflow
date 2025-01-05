@@ -15,4 +15,8 @@ class PricingPlansList(generics.ListCreateAPIView):
     serializer_class = PricingPlanSerializer
     authentication_classes = [JWTAuthentication]  # JWTAuthentication for handling JWT tokens
     permission_classes = [IsAuthenticated]  # Ensures the user is authenticated
-
+class PricingPlansList(generics.ListCreateAPIView):
+    queryset = PricingPlan.objects.all()
+    serializer_class = PricingPlanSerializer
+    authentication_classes = [JWTAuthentication]  # JWTAuthentication for handling JWT tokens
+    permission_classes = [IsAuthenticated]  # Ensures the user is authenticated

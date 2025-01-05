@@ -58,7 +58,7 @@ const plans = ref([]);
 const fetchPricePlans = async () => {
   isLoading.value = true;
   try {
-    const data = await $fetch("http://127.0.0.1:8000/api/pricing/");
+    const data = await $api("http://127.0.0.1:8000/api/pricing/");
     plans.value = data; // Set plans value when data is received
   } catch (error) {
     console.error("Error fetching price plans:", error);

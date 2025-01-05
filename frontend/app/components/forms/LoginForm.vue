@@ -134,6 +134,8 @@ const isLoading = ref(false);
 
 const token = ref("");
 
+const auth = useAuth()
+
 const emit = defineEmits(["close", "toggle"]);
 
 const openRegister = () => {
@@ -211,8 +213,9 @@ const loginUser = async () => {
     });
 
     console.log("Login successful:", response);
-    token.value = response.tokens.refresh
-    localStorage.setItem("token", token.value)
+    token.value = response.tokens.access
+    // localStorage.setItem("access_token", token.value)
+    auth.login(token.value)
     console.log(token.value)
   } catch (err) {
     if (err.data) {

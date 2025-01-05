@@ -33,5 +33,5 @@ export default defineNuxtConfig({
       pathPrefix: false,
     },
   ],
-  plugins: ["~/plugins/directives.js"],
+  plugins: ["~/plugins/directives.js", '~/plugins/auth.js'],
 });

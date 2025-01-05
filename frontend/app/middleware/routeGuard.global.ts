@@ -1,15 +1,19 @@
-export default defineNuxtRouteMiddleware((to, from) => {
+export default defineNuxtRouteMiddleware(async (to, from) => {
   if (to.path === "/profile") {
-    try {
-      const token = localStorage.getItem("token");
+    // Handle client-side logic (access localStorage)
+    if (process.client) {
+      const token = localStorage.getItem("access_token");
+
       if (token) {
-        return true;
-      } else {
+        // If the token exists, validate it
         return navigateTo("/login");
       }
-    } catch (e) {
-      console.log(e);
-      return abortNavigation(); // This should stop the navigation to /about
+    }
+
+    // Handle server-side logic (assume no token)
+    if (process.server) {
+      // Token validation would typically be done via cookies or headers for SSR
+      return navigateTo("/login"); // Redirect to login if the request is server-side
     }
   }
 });
