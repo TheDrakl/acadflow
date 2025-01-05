@@ -1,5 +1,7 @@
 <template>
-  <section class="bg-yellowMain dark:bg-yellowMainBg min-h-[120vh] lg:min-h-[90vh] font-roboto">
+  <section
+    class="bg-yellowMain dark:bg-yellowMainBg min-h-[120vh] lg:min-h-[90vh] font-roboto"
+  >
     <div
       class="lg:mt-0 flex flex-col lg:flex-row justify-between items-center pt-20 mx-6 lg:mx-0"
     >
@@ -31,10 +33,8 @@
               class="mt-[24px] text-white dark:text-white bg-buttonColor py-[0.7rem] px-8 lg:px-12 w-full shadow-lg"
               @click="goToSection('register')"
             >
-            
               Register Now
             </FirstButton>
-            
           </div>
           <div class="w-full lg:w-auto">
             <FirstButton
