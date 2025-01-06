@@ -22,24 +22,22 @@ class CustomTokenObtainPairView(TokenObtainPairView):
         response = super().post(request, *args, **kwargs)
         refresh_token = response.data["refresh"]
 
+        # Ensure cookie attributes are consistent
         response.set_cookie(
             key="refresh_token",
             value=refresh_token,
             httponly=True,
-            secure=True,
-            samesite="Strict",
-            max_age=60 * 60 * 24 * 7,
+            secure=False,  # Use True in production (over HTTPS)
+            samesite="Strict",  # Use 'Strict' or 'Lax' depending on your use case
+            max_age=60 * 60 * 24 * 7,  # 7 days expiration
         )
 
         return response
 
 
 class TokenRefreshView(generics.GenericAPIView):
-
     def post(self, request, *args, **kwargs):
         refresh_token = request.COOKIES.get("refresh_token")
-        print(refresh_token)
-
         if not refresh_token:
             raise AuthenticationFailed("Refresh token missing or invalid")
 
@@ -47,7 +45,7 @@ class TokenRefreshView(generics.GenericAPIView):
             token = RefreshToken(refresh_token)
             new_access_token = str(token.access_token)
             return Response({"access": new_access_token}, status=200)
-        except Exception as e:
+        except Exception:
             raise AuthenticationFailed("Invalid or expired refresh token")
 
 
@@ -69,26 +67,31 @@ class LoginView(generics.GenericAPIView):
             }
         )
 
+        # Ensure cookie attributes are consistent
         response.set_cookie(
             key="refresh_token",
             value=str(refresh),
-            httponly=True,  # Cannot be accessed via JavaScript
-            secure=True,  # True in production for HTTPS
-            samesite="None",  # Required for cross-site cookies
-            max_age=60 * 60 * 24 * 1,
-            path="/",  # Ensure this is set correctly
+            httponly=True,
+            secure=False,  # Use True in production
+            samesite="Strict",  # Use 'Strict' or 'Lax' depending on your use case
+            max_age=60 * 60 * 24 * 7,  # 7 days expiration
+            path="/",
         )
         return response
+
 
 class LogoutView(APIView):
     def post(self, request):
         if "refresh_token" not in request.COOKIES:
             raise AuthenticationFailed("You are not logged in or session is invalid.")
+        
         response = Response({"message": "Logged out successfully"})
+        
+        # Delete refresh token cookie and ensure cookie attributes match
         response.delete_cookie(
-            key="refresh_token",
-            path="/",  # Ensure this is the same as when setting the cookie
-            samesite="None",  # Ensure this matches the initial cookie
+            "refresh_token",
+            path="/",  # Ensure this matches the path when setting the cookie
+            samesite="Strict",  # Ensure this matches the initial cookie's samesite
         )
 
         return response

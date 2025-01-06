@@ -210,6 +210,7 @@ const loginUser = async () => {
       headers: {
         "Content-Type": "application/json", // Ensure proper content type
       },
+      credentials: 'include',
     });
 
     console.log("Login successful:", response);

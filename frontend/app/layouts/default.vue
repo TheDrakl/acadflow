@@ -130,9 +130,9 @@ const isLoggedIn = ref(false);
 // Move the async function inside onMounted to avoid the warning
 
 // Check if the user is logged in
-const isLoggedInFn = async () => {
+const isLoggedInFn = () => {
   try {
-    const authenticated = await auth.isAuthenticated();
+    const authenticated = auth.isAuthenticated();
     isLoggedIn.value = authenticated;
   } catch (error) {
     console.error("Error checking authentication:", error);
@@ -163,22 +163,51 @@ const getCsrfToken = () => {
   }
   return null;
 };
-
 const logout = async () => {
   try {
-    const csrfToken = getCsrfToken()
+    const csrfToken = getCsrfToken();
+    auth.logout()
     const response = await $fetch("http://127.0.0.1:8000/users/logout/", {
       method: "POST",
       headers: {
-        "X-CSRFToken": csrfToken, // Include CSRF token for security
+        "X-CSRFToken": csrfToken,
       },
-      credentials: "include", // Ensures cookies are sent with the request
+      credentials: "include",
     });
-    console.log(response.value);
-    // localStorage.removeItem('access_token')
-    isLoggedIn.value = false;
+
+    if (response.status === 403) {
+      console.log(
+        "Forbidden: You do not have permission to perform this action."
+      );
+      try {
+        auth.logout();
+      } catch (error) {
+        console.log("Error:", error);
+      }
+    } else {
+      auth.logout();
+      console.log(response.value);
+
+      isLoggedIn.value = false;
+    }
   } catch (error) {
-    console.error("Logout error:", error);
+    if (error.response) {
+      const { status } = error.response;
+      if (status === 403) {
+        console.log(
+          "Forbidden: You do not have permission to perform this action."
+        );
+        try {
+          auth.logout();
+        } catch (error) {
+          console.log("Error:", error);
+        }
+      } else {
+        console.error("Unexpected error:", error);
+      }
+    } else {
+      console.error("Logout error:", error);
+    }
   }
 };
 

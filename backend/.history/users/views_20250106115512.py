@@ -73,7 +73,7 @@ class LoginView(generics.GenericAPIView):
             key="refresh_token",
             value=str(refresh),
             httponly=True,  # Cannot be accessed via JavaScript
-            secure=True,  # True in production for HTTPS
+            secure=False,  # True in production for HTTPS
             samesite="None",  # Required for cross-site cookies
             max_age=60 * 60 * 24 * 1,
             path="/",  # Ensure this is set correctly
@@ -88,7 +88,7 @@ class LogoutView(APIView):
         response.delete_cookie(
             key="refresh_token",
             path="/",  # Ensure this is the same as when setting the cookie
-            samesite="None",  # Ensure this matches the initial cookie
+            samesite="Strict",  # Ensure this matches the initial cookie
         )
 
         return response

@@ -10,6 +10,7 @@ from .serializers import (
 from rest_framework.response import Response
 from rest_framework_simplejwt.views import TokenObtainPairView
 from rest_framework_simplejwt.tokens import RefreshToken
+from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.exceptions import AuthenticationFailed
 from rest_framework.views import APIView
@@ -27,16 +28,19 @@ class CustomTokenObtainPairView(TokenObtainPairView):
             value=refresh_token,
             httponly=True,
             secure=True,
-            samesite="Strict",
+            samesite="Lax",  
             max_age=60 * 60 * 24 * 7,
         )
 
+        # Don't need to delete the refresh token from response data
         return response
 
 
 class TokenRefreshView(generics.GenericAPIView):
+    print("start")
 
     def post(self, request, *args, **kwargs):
+        # First, check if refresh token is passed in the body or cookies
         refresh_token = request.COOKIES.get("refresh_token")
         print(refresh_token)
 
@@ -44,6 +48,7 @@ class TokenRefreshView(generics.GenericAPIView):
             raise AuthenticationFailed("Refresh token missing or invalid")
 
         try:
+            # Use the refresh token to generate a new access token
             token = RefreshToken(refresh_token)
             new_access_token = str(token.access_token)
             return Response({"access": new_access_token}, status=200)
@@ -72,24 +77,20 @@ class LoginView(generics.GenericAPIView):
         response.set_cookie(
             key="refresh_token",
             value=str(refresh),
-            httponly=True,  # Cannot be accessed via JavaScript
-            secure=True,  # True in production for HTTPS
-            samesite="None",  # Required for cross-site cookies
-            max_age=60 * 60 * 24 * 1,
-            path="/",  # Ensure this is set correctly
+            httponly=True,
+            secure=False,  # Use True in production
+            samesite="None",
+            max_age=60 * 60 * 24 * 7,
         )
         return response
+
 
 class LogoutView(APIView):
     def post(self, request):
         if "refresh_token" not in request.COOKIES:
             raise AuthenticationFailed("You are not logged in or session is invalid.")
         response = Response({"message": "Logged out successfully"})
-        response.delete_cookie(
-            key="refresh_token",
-            path="/",  # Ensure this is the same as when setting the cookie
-            samesite="None",  # Ensure this matches the initial cookie
-        )
+        response.delete_cookie("refresh_token")
 
         return response
 

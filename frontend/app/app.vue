@@ -16,15 +16,15 @@ body {
 </style>
 
 <script setup>
-import { onMounted } from "vue";
-import { useAuth } from "@/composables/useAuth"; // Adjust the import path accordingly
 
 const { isAuthenticated, isAccessTokenExpired, refreshToken } = useAuth();
 
 onMounted(() => {
-  if (isAuthenticated() && isAccessTokenExpired()) {
+  // checkToken()
+  if (isAuthenticated() && isAccessTokenExpired() ) {
     console.log("Token expired, refreshing...");
     refreshToken();
   }
 });
+
 </script>
