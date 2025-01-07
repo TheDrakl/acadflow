@@ -104,14 +104,44 @@
   <!-- Modals for registration / login -->
   <Teleport to="body" v-if="isOpenLogin">
     <div>
-      <LoginForm @close="closeLogin" @toggle="toggle" />
+      <LoginForm
+        @close="closeLogin"
+        @toggle="toggle"
+        @success="loggedInFn($event)"
+      />
     </div>
   </Teleport>
   <Teleport to="body" v-if="isOpenRegister">
     <div>
-      <RegisterForm @close="closeRegister" @toggle="toggle" />
+      <RegisterForm
+        @close="closeRegister"
+        @toggle="toggle"
+        @success="loggedInFn($event)"
+      />
     </div>
   </Teleport>
+  <div
+    v-if="isLoading"
+    class="absolute inset-0 flex justify-center items-center bg-opacity-50 bg-gray-800 z-20"
+  >
+    <Spinning />
+  </div>
+  <div
+    v-if="successLogin"
+    class="fixed bottom-0 inset-0 flex justify-center items-end z-50"
+  >
+    <h2 class="p-4 bg-green-400 text-center font-roboto w-full">
+      You successfully logged in account.
+    </h2>
+  </div>
+  <div
+    v-if="successRegister"
+    class="fixed bottom-0 inset-0 flex justify-center items-end z-50"
+  >
+    <h2 class="p-4 bg-green-400 text-center font-roboto w-full">
+      You successfully logged in account, now you can login
+    </h2>
+  </div>
   <main class="">
     <NuxtPage />
   </main>
@@ -124,15 +154,31 @@ const isOpenRegister = ref(false);
 const colorMode = useColorMode();
 const iconName = ref("material-symbols:light-mode");
 const auth = useAuth();
+const isLoading = ref(false);
+const success = ref(false)
+const successLogin = ref(false);
+const successRegister = ref(false);
 
 const isLoggedIn = ref(false);
 
 // Move the async function inside onMounted to avoid the warning
 
+const loggedInFn = (component) => {
+  if (component === "login") {
+    successLogin.value = true;
+    success.value = true
+    setTimeout(() => {
+      successLogin.value = false;
+    }, 2000);
+    return (isLoggedIn.value = true);
+  }
+};
+
 // Check if the user is logged in
-const isLoggedInFn = () => {
+
+const isLoggedInFn = async () => {
   try {
-    const authenticated = auth.isAuthenticated();
+    const authenticated = await auth.isAuthenticated();
     isLoggedIn.value = authenticated;
   } catch (error) {
     console.error("Error checking authentication:", error);
@@ -165,8 +211,9 @@ const getCsrfToken = () => {
 };
 const logout = async () => {
   try {
+    isLoading.value = true;
     const csrfToken = getCsrfToken();
-    auth.logout()
+    auth.logout();
     const response = await $fetch("http://127.0.0.1:8000/users/logout/", {
       method: "POST",
       headers: {
@@ -174,6 +221,7 @@ const logout = async () => {
       },
       credentials: "include",
     });
+    isLoading.value = false;
 
     if (response.status === 403) {
       console.log(

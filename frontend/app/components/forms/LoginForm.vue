@@ -114,12 +114,6 @@
       </div>
     </form>
   </div>
-  <div v-if="success && !isLoading && !errors">
-    class="fixed bottom-0 inset-0 flex justify-center items-end z-50" >
-    <h2 class="p-4 bg-green-400 text-center font-roboto w-full">
-      You successfully logged in, now you can use your dashboard
-    </h2>
-  </div>
 </template>
 <script setup>
 const form = reactive({
@@ -135,7 +129,7 @@ const token = ref("");
 
 const auth = useAuth()
 
-const emit = defineEmits(["close", "toggle"]);
+const emit = defineEmits(["close", "toggle", "success"]);
 
 const openRegister = () => {
   emit("toggle", "login");
@@ -186,6 +180,7 @@ const handleSubmit = async () => {
     try {
       await loginUser(); // Wait for the registration to complete
       success.value = true;
+      emit("success", "login")
       setTimeout(() => {
         success.value = false;
         closeModal();

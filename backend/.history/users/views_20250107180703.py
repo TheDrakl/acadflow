@@ -113,7 +113,7 @@ class RegisterView(generics.CreateAPIView):
         return Response(
             {
                 "user": serializer.data,
-                # "tokens": tokens,
+                "tokens": tokens,
             }
         )
 

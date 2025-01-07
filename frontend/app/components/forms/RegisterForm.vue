@@ -134,18 +134,10 @@
       </div>
     </form>
   </div>
-  <div
-    v-if="success"
-    class="fixed bottom-0 inset-0 flex justify-center items-end z-50"
-  >
-    <h2 class="p-4 bg-green-400 text-center font-roboto w-full">
-      You successfully registered an account, now you can login
-    </h2>
-  </div>
 </template>
 
 <script setup>
-const emit = defineEmits(["close", "toggle"]);
+const emit = defineEmits(["close", "toggle", "success"]);
 
 const form = reactive({
   email: { value: "", error: "" },
@@ -190,6 +182,7 @@ const handleSubmit = async () => {
     try {
       await registerUser(); // Wait for the registration to complete
       success.value = true;
+      emit("success", "register")
       setTimeout(() => {
         success.value = false;
         closeModal();
@@ -218,7 +211,6 @@ const registerUser = async () => {
     });
 
     console.log("Registration successful:");
-    console.log(response);
   } catch (err) {
     console.error("An unexpected error occurred:", err);
   }
@@ -244,17 +236,17 @@ const handleFocus = (field) => {
   form[field].error = "";
 };
 
-onMounted(() => {
-  if (typeof window !== "undefined") {
-    document.body.style.overflow = "hidden";
-    window.addEventListener("keydown", handleButton);
-  }
-});
+// onMounted(() => {
+//   if ((typeof window !== "undefined") & !success) {
+//     document.body.style.overflow = "hidden";
+//     window.addEventListener("keydown", handleButton);
+//   }
+// });
 
-onBeforeUnmount(() => {
-  if (typeof window !== "undefined") {
-    document.body.style.overflow = "auto";
-    window.removeEventListener("keydown", handleButton);
-  }
-});
+// onBeforeUnmount(() => {
+//   if ((typeof window !== "undefined") & !success) {
+//     document.body.style.overflow = "auto";
+//     window.removeEventListener("keydown", handleButton);
+//   }
+// });
 </script>
