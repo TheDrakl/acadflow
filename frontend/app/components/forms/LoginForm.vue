@@ -131,7 +131,6 @@ const success = ref(false);
 const errors = ref([]);
 
 const isLoading = ref(false);
-
 const token = ref("");
 
 const auth = useAuth()
