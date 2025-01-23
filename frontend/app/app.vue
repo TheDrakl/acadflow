@@ -21,7 +21,7 @@ const { isAuthenticated, isAccessTokenExpired, refreshToken } = useAuth();
 
 onMounted(() => {
   // checkToken()
-  if (isAuthenticated() && isAccessTokenExpired() ) {
+  if (isAuthenticated && isAccessTokenExpired() ) {
     console.log("Token expired, refreshing...");
     refreshToken();
   }

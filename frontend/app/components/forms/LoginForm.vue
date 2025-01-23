@@ -90,6 +90,9 @@
             </p>
           </div>
         </div>
+        <div v-if="errors && errors.length" class="text-red-400 font-inter mt-1 flex ml-auto mr-[12%]">
+          <p>{{ errors }}</p>
+        </div>
         <div class="w-full flex justify-center">
           <FirstButton
             class="mt-6 text-white dark:text-white bg-buttonColor py-[0.7rem] px-8 lg:px-12 w-3/4 shadow-lg"
@@ -127,7 +130,7 @@ const errors = ref([]);
 const isLoading = ref(false);
 const token = ref("");
 
-const auth = useAuth()
+const auth = useAuth();
 
 const emit = defineEmits(["close", "toggle", "success"]);
 
@@ -149,6 +152,7 @@ const handleButton = (event) => {
 
 const handleFocus = (field) => {
   form[field].error = "";
+  errors.value = []
 };
 
 const validateForm = (form) => {
@@ -178,17 +182,24 @@ const handleSubmit = async () => {
   if (isValid) {
     isLoading.value = true;
     try {
-      await loginUser(); // Wait for the registration to complete
-      success.value = true;
-      emit("success", "login")
-      setTimeout(() => {
-        success.value = false;
-        closeModal();
-      }, 1000);
+      const isLoggedIn = await loginUser();
+      console.log(isLoggedIn);
+      if (isLoggedIn) {
+        success.value = true;
+        emit("success", "login");
+
+        setTimeout(() => {
+          success.value = false;
+          closeModal();
+        }, 1000);
+      } else {
+        console.error("Login failed: Invalid credentials or API error.");
+        errors.value = "Invalid email or password!";
+      }
     } catch (error) {
-      console.error("Error during registration:", error);
+      console.error("Error during login:", error);
     } finally {
-      isLoading.value = false; // Ensure this runs after the process completes
+      isLoading.value = false;
     }
   }
 };
@@ -198,20 +209,26 @@ const loginUser = async () => {
     const response = await $fetch("http://127.0.0.1:8000/users/login/", {
       method: "POST",
       body: {
-        email: form.email.value, // Ensure these match your backend fields
+        email: form.email.value,
         password: form.password.value,
       },
       headers: {
-        "Content-Type": "application/json", // Ensure proper content type
+        "Content-Type": "application/json",
       },
-      credentials: 'include',
+      credentials: "include",
+
+      onResponse({ response }) {
+        if (response.status !== 200) {
+          throw new Error(`Unexpected response status: ${response.status}`);
+        }
+      },
     });
 
     console.log("Login successful:", response);
-    token.value = response.tokens.access
-    // localStorage.setItem("access_token", token.value)
-    auth.login(token.value)
-    console.log(token.value)
+    token.value = response.tokens.access;
+    auth.login(token.value);
+    console.log(token.value);
+    return true;
   } catch (err) {
     if (err.data) {
       console.error("Validation errors:", err.data);

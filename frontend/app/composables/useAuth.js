@@ -7,9 +7,8 @@ export function useAuth() {
 
   // Ensure checkToken is called when initializing useAuth
 
-  const isAuthenticated = () => {
-    return logged.value && !!accessToken.value;
-  };
+  // Replace isAuthenticated function with a computed property
+  const isAuthenticated = computed(() => logged.value && !!accessToken.value);
 
   const login = (token) => {
     localStorage.setItem("access_token", token);
@@ -29,7 +28,7 @@ export function useAuth() {
     try {
       const decoded = jwtDecode(accessToken.value);
       const isExpired = decoded.exp * 1000 < Date.now();
-      console.log('isExpired', isExpired);
+      console.log("isExpired", isExpired);
       return isExpired;
     } catch (error) {
       console.error("Error decoding token:", error);
@@ -49,10 +48,10 @@ export function useAuth() {
       }
     }
   };
-  checkToken()
+  checkToken();
 
   const refreshToken = async () => {
-    if (!isAuthenticated()) {
+    if (!isAuthenticated.value) {
       console.log(
         "User is not authenticated or token is valid, skipping refresh."
       );

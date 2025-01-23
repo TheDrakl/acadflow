@@ -85,11 +85,10 @@
             @click="toggleColorMode"
             class="cursor-pointer hidden lg:flex lg:absolute top-[1.75rem] right-16 bg-black dark:bg-[#FFEB3B]"
           />
-          <NuxtLink to="/profile">
-            <div
-              class="bg-[url('/images/user-image.png')] bg-cover bg-center w-[2.5rem] h-[2.2rem] lg:w-[2.8rem] lg:h-[2.8rem] rounded-full border-[1px] border-solid border-gray-400 shadow-sm cursor-pointer"
-            ></div>
-          </NuxtLink>
+          <div
+            class="bg-[url('/images/user-image.png')] bg-cover bg-center w-[2.5rem] h-[2.2rem] lg:w-[2.8rem] lg:h-[2.8rem] rounded-full border-[1px] border-solid border-gray-400 shadow-sm cursor-pointer"
+            @click="handleProfile()"
+          ></div>
         </div>
       </nav>
       <nav class="flex md:hidden float-right ml-auto">
@@ -129,8 +128,11 @@
   <div
     v-if="successLogin"
     class="fixed bottom-0 inset-0 flex justify-center items-end z-50"
+    data-aos="fade-top"
+    data-aos-offset="200"
+    data-aos-easing="ease-in-sine"
   >
-    <h2 class="p-4 bg-green-400 text-center font-roboto w-full">
+    <h2 class="p-4 bg-green-300 text-center font-roboto w-full">
       You successfully logged in account.
     </h2>
   </div>
@@ -138,8 +140,8 @@
     v-if="successRegister"
     class="fixed bottom-0 inset-0 flex justify-center items-end z-50"
   >
-    <h2 class="p-4 bg-green-400 text-center font-roboto w-full">
-      You successfully logged in account, now you can login
+    <h2 class="p-4 bg-green-300 text-center font-roboto w-full">
+      You successfully registered an account, now you can login
     </h2>
   </div>
   <main class="">
@@ -155,31 +157,50 @@ const colorMode = useColorMode();
 const iconName = ref("material-symbols:light-mode");
 const auth = useAuth();
 const isLoading = ref(false);
-const success = ref(false)
+const success = ref(false);
 const successLogin = ref(false);
 const successRegister = ref(false);
 
 const isLoggedIn = ref(false);
 
+const router = useRouter();
 // Move the async function inside onMounted to avoid the warning
 
 const loggedInFn = (component) => {
   if (component === "login") {
     successLogin.value = true;
-    success.value = true
+    success.value = true;
     setTimeout(() => {
       successLogin.value = false;
-    }, 2000);
+    }, 1500);
     return (isLoggedIn.value = true);
+  }
+
+  if (component === "register") {
+    successRegister.value = true;
+    success.value = true;
+    setTimeout(() => {
+      successRegister.value = false;
+    }, 1000);
   }
 };
 
 // Check if the user is logged in
 
+const handleProfile = () => {
+  if (!isLoggedIn.value) {
+    isOpenLogin.value = true;
+    console.log(isLoggedIn.value);
+  } else if (isLoggedIn.value) {
+    router.push("/profile");
+    console.log(isLoggedIn.value);
+  }
+};
+
 const isLoggedInFn = async () => {
   try {
-    const authenticated = await auth.isAuthenticated();
-    isLoggedIn.value = authenticated;
+    const authenticated = await auth.isAuthenticated.value;
+    return (isLoggedIn.value = authenticated);
   } catch (error) {
     console.error("Error checking authentication:", error);
     isLoggedIn.value = false; // Ensure it's set to false in case of error

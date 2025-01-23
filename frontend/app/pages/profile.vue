@@ -1,21 +1,28 @@
 <template>
-    <div class="profile-page">
-      <h1 class="text-xl font-bold mb-4">Profile Page</h1>
-      <div v-if="user">
-        <p><strong>Name:</strong> {{ user.name || '' }}</p>
-        <p><strong>Email:</strong> {{ user.email }}</p>
-      </div>
-      <div v-else>
-        <p>Loading user data...</p>
-      </div>
+  <div class="profile-page" v-if="auth.isAuthenticated.value">
+    <h1 class="text-xl font-bold mb-4">Profile Page</h1>
+    <div v-if="user">
+      <p><strong>Name:</strong> {{ user.name || "" }}</p>
+      <p><strong>Email:</strong> {{ user.email }}</p>
     </div>
-  </template>
+    <div v-else>
+      <p>Loading user data...</p>
+    </div>
+    s
+  </div>
+</template>
 
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref, onMounted } from "vue";
 
 const user = ref(null)
 const error = ref(null)
+const auth = useAuth()
+
+definePageMeta({
+  middleware: ['auth-user']
+})
+
 
 onMounted(async () => {
   try {

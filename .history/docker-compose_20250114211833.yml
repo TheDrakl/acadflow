@@ -1,0 +1,20 @@
+version: '3'
+services:
+  app:
+    build:
+      context: ./frontend/  # This should be the root of your project, or change to ./frontend if necessary
+      dockerfile: Dockerfile
+    container_name: nuxt-app
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./frontend:/app  # Ensure the correct folder is mounted into the container
+
+  nginx_frontend:
+    image: nginx:alpine
+    container_name: nginx-app
+    volumes:
+      - ./frontend/nginx/nginx.conf:/etc/nginx/nginx.conf
+    ports:
+      - "8080:80"
+      - app
