@@ -147,8 +147,121 @@
   <main class="">
     <NuxtPage />
   </main>
+  <footer>
+    <div
+      class="bg-[#333333] text-white p-8 md:pt-16 md:px-16 md:pb-4 font-roboto"
+    >
+      <section
+        class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-[1fr,1.5fr,1.5fr,1fr] gap-12 md:gap-16 text-center md:text-start"
+      >
+        <!-- Gym info -->
+        <div class="flex flex-col items-center">
+          <h2 class="text-4xl font-bold mb-4 text-lightGray"></h2>
+          <img
+            src="public/images/acadflow-logo.png"
+            alt=""
+            class="w-full max-w-[13rem]"
+          />
+        </div>
 
-  <footer class="bg-deepYellow min-h-[50vh]"></footer>
+        <!-- Links -->
+        <div class="lg:flex-col items-center hidden lg:flex">
+          <h2 class="text-xl font-inter mb-4 text-lightGray">Services</h2>
+          <ul class="space-y-2 text-md text-milkBlue font-montserrat text-center">
+            <li><a href="#" class="hover-underline-animation">Home</a></li>
+            <li><a href="#" class="hover-underline-animation">About</a></li>
+            <li><a href="#" class="hover-underline-animation">Dashboard</a></li>
+            <li><a href="#" class="hover-underline-animation">Contact</a></li>
+            <li><a href="#" class="hover-underline-animation">Privacy Policy</a></li>
+          </ul>
+        </div>
+
+        <!-- Contact Info -->
+        <div class="flex flex-col items-center text-center">
+          <h2 class="text-xl font-inter mb-4 text-lightGray">Contact Us</h2>
+          <ul class="space-y-4 text-md text-milkBlue font-montserrat">
+            <li class="flex items-center justify-center">
+              <font-awesome-icon
+                :icon="['fa', 'phone']"
+                class="text-milkBlue"
+              />
+              <span class="ml-3">+123 456 7890</span>
+            </li>
+            <li class="flex items-center justify-center">
+              <font-awesome-icon
+                :icon="['fa', 'envelope']"
+                class="text-milkBlue"
+              />
+              <span class="ml-3">info@email.com</span>
+            </li>
+            <li class="flex items-center justify-center">
+              <font-awesome-icon :icon="['fa', 'map']" class="text-milkBlue" />
+              <span class="ml-3">Address 2, A1</span>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Social Media Links -->
+        <div class="flex flex-col items-center">
+          <div class="space-between space-x-8 text-3xl ">
+            <Icon
+              name="mdi:instagram"
+              style="color: white"
+              size="2rem"
+              class="text-milkBlue cursor-pointer"
+            ></Icon>
+            <Icon
+              name="uil:youtube"
+              style="color: white"
+              size="2rem"
+              class="text-milkBlue cursor-pointer"
+            ></Icon>
+            <Icon
+              name="mdi:twitter"
+              style="color: white"
+              size="2rem"
+              class="text-milkBlue cursor-pointer"
+            ></Icon>
+            <Icon
+              name="ic:baseline-facebook"
+              style="color: white"
+              size="2rem"
+              class="text-milkBlue cursor-pointer"
+            ></Icon>
+          </div>
+          <!-- Newsletter -->
+          <div class="flex flex-col items-center mt-8">
+            <h2 class="text-xl font-inter mb-4 text-gray-200 text-center">
+              Newsletter
+            </h2>
+            <form class="flex flex-col space-y-4">
+              <input
+                type="email"
+                placeholder="Your email"
+                class="p-2 w-[25vh] rounded bg-black text-white border border-lightGray placeholder-lightGray focus:outline-none focus:ring-1 focus:ring-orange-900"
+              />
+              <button
+                class="p-2 rounded-md bg-buttonColor hover:bg-[#001F4D] text-milkWhite font-montserrat"
+              >
+                Subscribe
+              </button>
+            </form>
+          </div>
+        </div>
+      </section>
+
+      <!-- All rights reserved by -->
+      <div class="border-t-[1px] border-colorLine mt-16"></div>
+      <div class="mt-8 mb-4 text-center">
+        <p class="text-sm font-montserrat text-milkBlue tracking-wide">
+          &copy; 2025 AcadFlow. All rights reserved. Created by
+          <span class="text-yellowMain hover:underline"
+            ><a href="https://github.com/TheDrakl">TheDrakl</a></span
+          >
+        </p>
+      </div>
+    </div>
+  </footer>
 </template>
 <script setup>
 const isOpenLogin = ref(false);
@@ -181,7 +294,7 @@ const loggedInFn = (component) => {
     success.value = true;
     setTimeout(() => {
       successRegister.value = false;
-    }, 1000);
+    }, 1500);
   }
 };
 
@@ -242,6 +355,7 @@ const logout = async () => {
       },
       credentials: "include",
     });
+    router.push("/");
     isLoading.value = false;
 
     if (response.status === 403) {
