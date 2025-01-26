@@ -21,7 +21,7 @@
 
 ---
 
-## Frontend Preview 🎨
+## Frontend Preview
 
 ### **Screenshots**
 <div align="center">
