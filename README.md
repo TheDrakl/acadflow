@@ -21,26 +21,6 @@
 
 ---
 
-## Frontend Preview
-
-### **Screenshots**
-<div align="center">
-  <table>
-    <tr>
-      <td align="center"><strong>Hero Section</strong></td>
-      <td align="center"><strong>Why Choose Acadflow?</strong></td>
-      <td align="center"><strong>Lesson Creation</strong></td>
-    </tr>
-    <tr>
-      <td><img src="https://github.com/user-attachments/assets/c85001ad-8652-4147-a4a8-54f83b9df493" alt="Hero Section" width="400"/></td>
-      <td><img src="https://github.com/user-attachments/assets/631f02ef-f759-44e0-ab5e-c72bbdb52848" alt="Why Choose Acadflow?" width="400"/></td>
-      <td><img src="https://github.com/user-attachments/assets/7cbc44b3-161e-40a2-993f-b967e0ef5705" alt="Pricing" width="400"/></td>
-    </tr>
-  </table>
-</div>
-
----
-
 ## Tech Stack 🛠️
 
 ### **Frontend**
